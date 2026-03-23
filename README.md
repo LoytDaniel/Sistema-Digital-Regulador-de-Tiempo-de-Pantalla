@@ -1,0 +1,1 @@
+# Sistema-Digital-Regulador-de-Tiempo-de-Pantalla
