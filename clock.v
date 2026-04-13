@@ -12,7 +12,7 @@ always @(posedge clk) begin
         count <= 0;
     end
     else begin
-        if (cuenta == 833334) begin // Ajustar este valor para tener una frec de 60 Hz
+        if (cuenta == 833334) begin // Ajustar este valor para el debounce deseado ()
             count <= ~count; // Cambia el estado del contador
             cuenta <= 0; // Reinicia la cuenta
         end
