@@ -1,6 +1,6 @@
 module counter (
     input clk, reset,
-    output [1:0] count
+    output reg [1:0] count
 );
     
     always @(posedge clk) begin //se activa en el flanco positivo del reloj o cuando se activa el reset

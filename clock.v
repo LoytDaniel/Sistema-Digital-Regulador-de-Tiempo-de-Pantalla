@@ -12,7 +12,7 @@ always @(posedge clk) begin
         count <= 0;
     end
     else begin
-        if (cuenta == 833334) begin // Ajustar este valor para el debounce deseado ()
+        if (cuenta == 1000000) begin // Ajustar este valor para el debounce deseado (cuenta hasta 1 mill o 75 mill si se deja 1.5s)
             count <= ~count; // Cambia el estado del contador
             cuenta <= 0; // Reinicia la cuenta
         end

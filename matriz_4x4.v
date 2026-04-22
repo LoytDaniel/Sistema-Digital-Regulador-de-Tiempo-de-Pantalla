@@ -1,7 +1,7 @@
 module matriz_4x4 (
     input [3:0]column,
-    input counter, clk, reset,
-    output push_button,
+    input clk, reset,
+    output reg push_button,
     output reg [3:0]row,
     output reg [3:0]key_value
 );
@@ -13,6 +13,7 @@ module matriz_4x4 (
     El valor de push_button se asigna a 1 cuando se detecta una tecla presionada, y a 0 cuando no se detecta ninguna tecla.
     */
     wire clk1;
+    wire [1:0] counter;
     clock cl (.clk(clk), .reset(reset), .count(clk1));
     counter c1 (.clk(clk1), .reset(reset), .count(counter));
 
