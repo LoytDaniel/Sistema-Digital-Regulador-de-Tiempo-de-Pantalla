@@ -1,0 +1,29 @@
+module debounce #(
+    parameter DEBOUNCE_MAX = 1_000_000
+)(
+    input clk, rstn, set;
+    output reg set_stable;
+);
+
+    reg set_prev_raw;
+    integer debounce_cnt = 0;
+
+    always @(posedge clk) begin
+         if (!rstn) begin
+            set_stable    <= 0;
+            set_prev_raw  <= 0;
+            debounce_cnt  <= 0;
+        end else begin
+            if (set !== set_prev_raw) begin
+            // Detectó cambio — reinicia contador
+                debounce_cnt <= 0;
+                set_prev_raw <= set;
+            end else if (debounce_cnt < DEBOUNCE_MAX) begin
+                debounce_cnt <= debounce_cnt + 1;
+            end else begin
+            // Estuvo estable 20ms → aceptar valor
+                set_stable <= set_prev_raw;
+            end
+        end
+    end
+endmodule

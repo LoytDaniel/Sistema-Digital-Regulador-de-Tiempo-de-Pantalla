@@ -1,14 +1,15 @@
-module Clock_w_DS1302 (
-	input clk50, rstn, wr_btn, set_btn,
+module DS1302_Top (
+	input clk, rstn, wr_btn, set_btn,
 	input [5:0] ext_input,
 	
 	output [6:0] seg,
-    output [2:0] bitON,
+    output [5:0] bitON,
 	output CE, SCLK,
-    inout IO
+    inout IO,
+	output hr_en, min_en, sec_en
 );
 	
-	wire clk1, rd_tick;
+	wire clk1, rd_tick, set_stable;
 	wire [4:0] hr;
 	wire [5:0] min, sec;
 	wire [7:0] hr_bcd, min_bcd, sec_bcd;
@@ -18,20 +19,31 @@ module Clock_w_DS1302 (
     //logica negada
     wire [5:0] next_input;
     wire nwr_btn, nset_btn;
+	wire [5:0] nbitON;
+	wire [6:0] nseg;
     assign nwr_btn = ~wr_btn;
     assign nset_btn = ~set_btn;
     assign next_input = ~ext_input;
-	
-    Time_setting time_set(.clk(clk50), 
+
+	Debounce db(.clk(clk), 
+				.rstn(rstn), 
+				.set(nset_btn),
+				.set_stable(set_stable)
+				);
+
+    Time_setting time_set(.clk(clk), 
                           .rstn(rstn), 
                           .ext_input(next_input), 
-                          .set(nset_btn), 
+                          .set(set_stable), 
                           .hr(hr), 
                           .min(min), 
-                          .sec(sec)
+                          .sec(sec),
+						  .hr_en(hr_en),
+						  .min_en(min_en),
+						  .sec_en(sec_en)
                             );
 	
-	CLK_div clk(.clk_in(clk50), .clk_out(clk1));
+	CLK_div cl(.clk_in(clk), .clk_out(clk1));
 	
 	Bin_to_BCD bcd (.hr_in(hr), 
 					.min_in(min), 
@@ -64,12 +76,16 @@ module Clock_w_DS1302 (
 	assign min_out = {1'b0, time_data_out[14:8]}; // Bit 7 of minute register does not affect the minute reading
 	assign sec_out = {1'b0, time_data_out[6:0]}; // Bit 7 of second register is the Clock Halt (CH) flag
 	
-    Display_7_seg display(.clk(clk50),
+    Display_7_seg display(.clk(clk),
+							.rstn(rstn),
                             .hr(hr_out), 
                             .min(min_out), 
                             .sec(sec_out), 
-                            .seg(seg), 
-                            .bitON(bitON)
+                            .seg(nseg), 
+                            .bitON(nbitON)
                         );
+
+	assign bitON = ~nbitON;
+	assign seg = ~nseg;
 
 endmodule

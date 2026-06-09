@@ -1,7 +1,7 @@
 module Bin_to_BCD (hr_in, min_in, sec_in, hr_out, min_out, sec_out);
 	
-	input reg [5:0] min_in, sec_in;
-	input reg [4:0] hr_in;
+	input [5:0] min_in, sec_in;
+	input [4:0] hr_in;
 	
 	output reg [7:0] hr_out, min_out, sec_out; // 8-bit BCD format for hr, min, sec
 	

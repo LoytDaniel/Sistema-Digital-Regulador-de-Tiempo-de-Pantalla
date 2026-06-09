@@ -1,0 +1,109 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "seg[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg[6]",
+					"strict" : false
+				},
+				{
+					"name" : "bitON[0]",
+					"strict" : false
+				},
+				{
+					"name" : "bitON[1]",
+					"strict" : false
+				},
+				{
+					"name" : "bitON[2]",
+					"strict" : false
+				},
+				{
+					"name" : "bitON[3]",
+					"strict" : false
+				},
+				{
+					"name" : "bitON[4]",
+					"strict" : false
+				},
+				{
+					"name" : "bitON[5]",
+					"strict" : false
+				},
+				{
+					"name" : "hr_en",
+					"strict" : false
+				},
+				{
+					"name" : "min_en",
+					"strict" : false
+				},
+				{
+					"name" : "sec_en",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "rstn",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[1]",
+					"strict" : false
+				},
+				{
+					"name" : "set",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

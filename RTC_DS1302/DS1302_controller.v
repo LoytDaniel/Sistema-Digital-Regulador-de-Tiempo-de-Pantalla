@@ -7,7 +7,7 @@ module DS1302_controller (clk1, rstn, rd_tick, wr_btn, hr, min, sec, time_out, C
 	localparam WR_SEC_REG_ADDR = 8'h80; // Seconds register address, used to clear Clock Halt during initialization (CH = 0 to start the clock)
 	
 	input clk1, rstn; 
-    input reg rd_tick, wr_btn;
+    input rd_tick, wr_btn;
 	input [7:0] hr, min, sec; // Time to write, in BCD format
 	
 	output reg CE, SCLK;
@@ -18,10 +18,9 @@ module DS1302_controller (clk1, rstn, rd_tick, wr_btn, hr, min, sec, time_out, C
 	reg read_request, prev_wr_btn;
 	reg io_dir, io; // io_dir controls the direction of IO port, io_dir = 1: output, io_dir = 0: input
 	reg CH_init, WP_init; // These flags check if the RTC module has been initialized (Write Protection and Clock Halt is cleared) or not
-	reg [3:0] state;
 	reg [6:0] count; // count to keep track of the current data bit
 	reg [7:0] addr;
-	reg [63:0] burst_data;
+	wire [63:0] burst_data;
 	
     // State machine states
     localparam IDLE = 4'b0000; 
@@ -54,7 +53,7 @@ module DS1302_controller (clk1, rstn, rd_tick, wr_btn, hr, min, sec, time_out, C
     always @(posedge clk1) begin
         if(!rstn)
             read_request <= 0;
-        else if(read_tick)
+        else if(rd_tick)
             read_request <= 1;
         else if(state == WR_ADDR_PREP && addr == BURST_RD_ADDR)
             read_request <= 0;

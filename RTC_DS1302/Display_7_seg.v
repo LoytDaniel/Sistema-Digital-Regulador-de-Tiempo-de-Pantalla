@@ -1,26 +1,28 @@
-module Display_7_seg (clk, hr, min, sec, seg, bitON);
-	
-	input reg clk;
-	input reg [7:0] hr, min, sec; // in BCD	
-	output reg [6:0] seg;
-    output reg [2:0] bitON;
+module Display_7_seg #(
+	parameter CYCLES_PER_DIGIT = 8333
+)(
+	input clk, rstn,
+	input [7:0] hr, min, sec, // in BCD	
+	output reg [6:0] seg,
+    output reg [5:0] bitON
+);
 	
     reg [6:0] HEX [0:5];
-    reg [2:0] count;
-    reg clk_divider;
+    reg [2:0] count = 0;
+    reg tick;
     integer clk_counter = 0;
 
-    localparam ZERO = 7'b1111110; //Cero
-    localparam ONE = 7'b0110000; //uno
-    localparam TWO = 7'b1101101; //Dos
-    localparam THREE = 7'b1111001; //Tres
-    localparam FOUR = 7'b0110011; //Cuatro
-    localparam FIVE = 7'b1011011; //Cinco
-    localparam SIX = 7'b1011111; //seis
-    localparam SEVEN = 7'b1110000; //Siete
+    localparam ZERO = 7'b0111111; //Cero
+    localparam ONE = 7'b0000110; //uno
+    localparam TWO = 7'b1011011; //Dos
+    localparam THREE = 7'b1001111; //Tres
+    localparam FOUR = 7'b1100110; //Cuatro
+    localparam FIVE = 7'b1101101; //Cinco
+    localparam SIX = 7'b1111101; //seis
+    localparam SEVEN = 7'b0000111; //Siete
     localparam EIGHT = 7'b1111111; //Ocho
-    localparam NINE = 7'b1111011; //Nueve
-    localparam DASH = 7'b0000001; //Guion
+    localparam NINE = 7'b1100111; //Nueve
+    localparam DASH = 7'b1000000; //Guion
 
 	// Tens digit of hour
 	always @(*) begin
@@ -124,43 +126,33 @@ module Display_7_seg (clk, hr, min, sec, seg, bitON);
 		endcase
 	end
 
-    always @(posedge clk) begin
-        if (clk_counter == 104166) begin
-            clk_divider <= ~clk_divider;
-            clk_counter <= 0;
-        end else begin
-            clk_counter <= clk_counter + 1;
-        end
+always @(posedge clk) begin
+	if (!rstn) begin
+		clk_counter <= 0;
+		tick <= 0;
+	end else if (clk_counter == CYCLES_PER_DIGIT) begin
+		tick <= 1;
+		clk_counter <= 0;
+	end else begin
+		tick <= 0;
+		clk_counter <= clk_counter + 1;
+	end
+end
+
+always @(posedge clk) begin
+    if (tick) begin  // solo avanza cada CYCLES_PER_DIGIT ciclos
+        if (count == 5) count <= 0;
+        else count <= count + 1;
+
+        case (count)
+            3'd0: begin seg = HEX[0]; bitON = 6'b000001; end
+            3'd1: begin seg = HEX[1]; bitON = 6'b000010; end
+            3'd2: begin seg = HEX[2]; bitON = 6'b000100; end
+            3'd3: begin seg = HEX[3]; bitON = 6'b001000; end
+            3'd4: begin seg = HEX[4]; bitON = 6'b010000; end
+            3'd5: begin seg = HEX[5]; bitON = 6'b100000; end
+        endcase
     end
-	
-    always @(posedge clk_divider)
-        begin
-            case (count)
-                0: begin
-                    seg=HEX[0];
-                    bitON=3'b001;
-                end
-                1: begin
-                    seg=HEX[1];
-                    bitON=3'b010;
-                end
-                2: begin
-                    seg=HEX[2];
-                    bitON=3'b011;
-                end 
-                3: begin
-                    seg=HEX[3];
-                    bitON=3'b100;
-                end
-                4: begin
-                    seg=HEX[4];
-                    bitON=3'b101;
-                end
-                5: begin
-                    seg=HEX[5];
-                    bitON=3'b110;
-                end
-            endcase
-        end
+end
 
 endmodule 

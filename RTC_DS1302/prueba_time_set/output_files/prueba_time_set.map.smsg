@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at Display_7_seg.v(142): always construct contains both blocking and non-blocking assignments File: C:/Users/Usuario/Documents/GitHub/Sistema-Digital-Regulador-de-Tiempo-de-Pantalla/RTC_DS1302/Display_7_seg.v Line: 142

@@ -1,0 +1,31 @@
+module top_time_set (
+    input clk, rstn, set,
+    input [5:0] ext_input,
+    output [4:0] hr,
+    output [5:0] min, sec,
+    output hr_en, min_en, sec_en
+);
+
+wire nset;
+wire [4:0] nhr;
+wire [5:0] nmin, nsec;
+
+assign nset = ~set;
+assign hr = ~nhr;
+assign min = ~nmin;
+assign sec = ~nsec;
+    
+Time_setting time_set (
+    .clk(clk), 
+    .rstn(rstn), 
+    .ext_input(ext_input), 
+    .set(set), 
+    .hr(hr), 
+    .min(min), 
+    .sec(sec),
+    .hr_en(hr_en),
+    .min_en(min_en),
+    .sec_en(sec_en)
+);
+
+endmodule
