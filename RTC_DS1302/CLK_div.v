@@ -1,7 +1,7 @@
 module CLK_div (clk_in, clk_out);  // Reloj con frecuencia de 1 MHz para el módulo RTC_DS1302, asumiendo que el reloj de la FPGA es de 50 MHz
 	
 	input clk_in;
-	output clk_out;
+	output reg clk_out;
 	
 	integer DIVISOR = 5'd25;
 	
