@@ -1,0 +1,306 @@
+// =============================================================================
+// La pantalla se divide en dos mitades de 64x64 píxeles:
+//   - CS1 activo: columnas 0–63  (lado izquierdo)
+//   - CS2 activo: columnas 64–127 (lado derecho)
+//
+// La RAM gráfica se organiza en 8 páginas (X=0..7) × 64 columnas por chip.
+// Cada byte escrito representa 8 píxeles en dirección vertical (DB0=arriba).
+//
+// Parámetros:
+//   NUM_COMMANDS    : Número de comandos de inicialización por chip (4)
+//   NUM_COLS        : Columnas por chip (64)
+//   NUM_PAGES       : Páginas por chip (8)
+//   DATA_BITS       : Ancho del bus de datos (8)
+//   COUNT_MAX       : Divisor de frecuencia para generar pulso ~16ms
+// =============================================================================
+
+module LCD12864_controller #(
+    parameter NUM_COMMANDS = 4,
+    parameter NUM_COLS = 64,
+    parameter NUM_PAGES = 8,
+    parameter DATA_BITS = 8,
+    parameter COUNT_MAX = 800000
+)(
+    input clk,
+    input reset,
+    input ready_i,
+    output reg di,      // Data/Instruction (0=cmd, 1=dato)
+    output reg rw,      // Read/Write (siempre 0=write)
+    output enable,  // Pulso de habilitación (= clk_16ms)
+    output reg cs1,     // Chip Select lado izquierdo
+    output reg cs2,     // Chip Select lado derecho
+    output reg [DATA_BITS-1:0] data     // Bus de datos 8 bits
+);
+
+// ---------------------------------------------------------------------------
+// Señal auxiliar: ready negado
+// ---------------------------------------------------------------------------
+wire nready_i;
+assign nready_i = ~ready_i;
+
+// ---------------------------------------------------------------------------
+// Comandos KS0108
+// ---------------------------------------------------------------------------
+localparam DISPLAY_ON = 8'h3F;  // 0011 1111  – Display ON
+localparam DISPLAY_OFF = 8'h3E;  // 0011 1110  – Display OFF
+localparam SET_START_L0 = 8'hC0;  // 1100 0000  – Start line = 0
+localparam SET_PAGE_0 = 8'hB8;  // 1011 1000  – Página (X) = 0
+localparam SET_Y_0 = 8'h40;  // 0100 0000  – Y address = 0
+
+// ---------------------------------------------------------------------------
+// Estados de la FSM
+// Codificación: 4 bits para cubrir 9 estados
+// ---------------------------------------------------------------------------
+localparam IDLE = 4'd0,
+localparam CONFIG_CS1 = 4'd1,   // Enviar 4 comandos de init al chip 1
+localparam SET_PG_CS1 = 4'd2,   // Enviar Set Page al chip 1 antes de cada página
+localparam WR_DATA_CS1 = 4'd3,   // Escribir 64 bytes de datos en chip 1
+localparam NEXT_PG_CS1 = 4'd4,   // Avanzar página en chip 1
+localparam CONFIG_CS2 = 4'd5,   // Enviar 4 comandos de init al chip 2
+localparam SET_PG_CS2 = 4'd6,   // Enviar Set Page al chip 2 antes de cada página
+localparam WR_DATA_CS2 = 4'd7,   // Escribir 64 bytes de datos en chip 2
+localparam NEXT_PG_CS2 = 4'd8;   // Avanzar página en chip 2
+
+reg [3:0] fsm_state;
+reg [3:0] next_state;
+
+// ---------------------------------------------------------------------------
+// Divisor de frecuencia → clk_16ms
+// ---------------------------------------------------------------------------
+reg [$clog2(COUNT_MAX)-1:0] clk_counter;
+reg clk_16ms;
+
+always @(posedge clk) begin
+    if (clk_counter == COUNT_MAX - 1) begin
+        clk_16ms <= ~clk_16ms;
+        clk_counter <= 'b0;
+    end else begin
+        clk_counter <= clk_counter + 1;
+    end
+end
+
+assign enable = clk_16ms;
+
+// ---------------------------------------------------------------------------
+// Contadores
+// ---------------------------------------------------------------------------
+reg [$clog2(NUM_COMMANDS):0] command_counter; // Índice sobre config_mem
+reg [$clog2(NUM_COLS):0] data_counter;    // Columna dentro de la página
+reg [$clog2(NUM_PAGES):0] page_counter;    // Página actual (0..7)
+
+// ---------------------------------------------------------------------------
+// Memorias
+// ---------------------------------------------------------------------------
+// Datos gráficos: 2 chips × 8 páginas × 64 columnas = 1024 bytes
+// Disposición en data.txt (hex):
+//   [0..511]   → chip 1: página 0 cols 0-63, página 1 cols 0-63 … página 7
+//   [512..1023]→ chip 2: ídem
+localparam NUM_DATA_ALL = NUM_COLS * NUM_PAGES * 2; // 1024
+
+reg [DATA_BITS-1:0] graphic_mem [0:NUM_DATA_ALL-1];
+reg [DATA_BITS-1:0] config_mem [0:NUM_COMMANDS-1];
+
+// ---------------------------------------------------------------------------
+// Inicialización
+// ---------------------------------------------------------------------------
+initial begin
+    fsm_state <= IDLE;
+    command_counter <= 'b0;
+    data_counter <= 'b0;
+    page_counter <= 'b0;
+    di <= 1'b0;
+    rw <= 1'b0; // Siempre escritura
+    cs1 <= 1'b0;
+    cs2 <= 1'b0;
+    data <= 8'b0;
+    clk_16ms <= 1'b0;
+    clk_counter <= 'b0;
+
+    // Cargar imagen/gráfico desde archivo (1024 bytes en hex)
+    $readmemh("data.txt", graphic_mem);
+
+    // Secuencia de inicialización KS0108 (igual para CS1 y CS2)
+    config_mem[0] <= SET_START_L0;  // Línea de inicio = 0
+    config_mem[1] <= SET_PAGE_0;    // Página 0 (X address)
+    config_mem[2] <= SET_Y_0;       // Y address = 0
+    config_mem[3] <= DISPLAY_ON;    // Display ON
+end
+
+// ---------------------------------------------------------------------------
+// Registro de estado (síncrono con clk_16ms)
+// ---------------------------------------------------------------------------
+always @(posedge clk_16ms) begin
+    if (reset == 1'b0)
+        fsm_state <= IDLE;
+    else
+        fsm_state <= next_state;
+end
+
+// ---------------------------------------------------------------------------
+// Lógica de próximo estado (combinacional)
+// ---------------------------------------------------------------------------
+always @(*) begin
+    case (fsm_state)
+
+        IDLE:
+            next_state = nready_i ? CONFIG_CS1 : IDLE;
+
+        // --- Chip 1: inicialización ---
+        CONFIG_CS1:
+            next_state = (command_counter == NUM_COMMANDS) ? SET_PG_CS1 : CONFIG_CS1;
+
+        // --- Chip 1: enviar Set Page antes de escribir ---
+        SET_PG_CS1:
+            next_state = WR_DATA_CS1;
+
+        // --- Chip 1: escribir 64 columnas de la página actual ---
+        WR_DATA_CS1:
+            next_state = (data_counter == NUM_COLS) ? NEXT_PG_CS1 : WR_DATA_CS1;
+
+        // --- Chip 1: avanzar página o pasar a chip 2 ---
+        NEXT_PG_CS1:
+            next_state = (page_counter == NUM_PAGES) ? CONFIG_CS2 : SET_PG_CS1;
+
+        // --- Chip 2: inicialización ---
+        CONFIG_CS2:
+            next_state = (command_counter == NUM_COMMANDS) ? SET_PG_CS2 : CONFIG_CS2;
+
+        // --- Chip 2: enviar Set Page antes de escribir ---
+        SET_PG_CS2:
+            next_state = WR_DATA_CS2;
+
+        // --- Chip 2: escribir 64 columnas de la página actual ---
+        WR_DATA_CS2:
+            next_state = (data_counter == NUM_COLS) ? NEXT_PG_CS2 : WR_DATA_CS2;
+
+        // --- Chip 2: avanzar página o terminar ---
+        NEXT_PG_CS2:
+            next_state = (page_counter == NUM_PAGES) ? IDLE : SET_PG_CS2;
+
+        default:
+            next_state = IDLE;
+
+    endcase
+end
+
+// ---------------------------------------------------------------------------
+// Lógica de salida y actualización de contadores (síncrono con clk_16ms)
+// ---------------------------------------------------------------------------
+always @(posedge clk_16ms) begin
+    if (reset == 1'b0) begin
+        command_counter <= 'b0;
+        data_counter <= 'b0;
+        page_counter <= 'b0;
+        di <= 1'b0;
+        cs1 <= 1'b0;
+        cs2 <= 1'b0;
+        data <= 'b0;
+        $readmemh("data.txt", graphic_mem);
+    end else begin
+        case (next_state)
+
+            // ----------------------------------------------------------
+            IDLE: begin
+                command_counter <= 'b0;
+                data_counter <= 'b0;
+                page_counter <= 'b0;
+                di <= 1'b0;
+                cs1 <= 1'b0;
+                cs2 <= 1'b0;
+                data <= 'b0;
+            end
+
+            // ----------------------------------------------------------
+            // CHIP 1
+            // ----------------------------------------------------------
+            CONFIG_CS1: begin
+                cs1 <= 1'b1;
+                cs2 <= 1'b0;
+                di <= 1'b0;  // Instrucción
+                data <= config_mem[command_counter];
+                command_counter <= command_counter + 1;
+            end
+
+            SET_PG_CS1: begin
+                // Resetear contadores al entrar a nueva página
+                command_counter <= 'b0;
+                data_counter <= 'b0;
+                cs1 <= 1'b1;
+                cs2 <= 1'b0;
+                di <= 1'b0;  // Instrucción
+                // SET_PAGE_0 + page_counter: 1011 1XXX
+                data <= SET_PAGE_0 | page_counter[2:0];
+            end
+
+            WR_DATA_CS1: begin
+                cs1 <= 1'b1;
+                cs2 <= 1'b0;
+                di <= 1'b1;  // Dato gráfico
+                // Dirección en graphic_mem: página × 64 + columna
+                data <= graphic_mem[(page_counter * NUM_COLS) + data_counter];
+                data_counter <= data_counter + 1;
+            end
+
+            NEXT_PG_CS1: begin
+                data_counter <= 'b0;
+                page_counter <= page_counter + 1;
+                cs1 <= 1'b1;
+                cs2 <= 1'b0;
+                di <= 1'b0;
+                data <= 'b0;
+            end
+
+            // ----------------------------------------------------------
+            // CHIP 2
+            // ----------------------------------------------------------
+            CONFIG_CS2: begin
+                // Resetear page_counter al inicio del chip 2
+                page_counter <= 'b0;
+                command_counter <= (fsm_state == NEXT_PG_CS1) ? 'b0 : command_counter + 1;
+                cs1 <= 1'b0;
+                cs2 <= 1'b1;
+                di <= 1'b0;  // Instrucción
+                data <= config_mem[command_counter];
+            end
+
+            SET_PG_CS2: begin
+                command_counter <= 'b0;
+                data_counter <= 'b0;
+                cs1 <= 1'b0;
+                cs2 <= 1'b1;
+                di <= 1'b0;  // Instrucción
+                data <= SET_PAGE_0 | page_counter[2:0];
+            end
+
+            WR_DATA_CS2: begin
+                cs1 <= 1'b0;
+                cs2 <= 1'b1;
+                di <= 1'b1;  // Dato gráfico
+                // Chip 2 ocupa la segunda mitad de graphic_mem
+                data <= graphic_mem[(NUM_COLS * NUM_PAGES)
+                                            + (page_counter * NUM_COLS)
+                                            + data_counter];
+                data_counter <= data_counter + 1;
+            end
+
+            NEXT_PG_CS2: begin
+                data_counter <= 'b0;
+                page_counter <= page_counter + 1;
+                cs1 <= 1'b0;
+                cs2 <= 1'b1;
+                di <= 1'b0;
+                data <= 'b0;
+            end
+
+            default: begin
+                cs1 <= 1'b0;
+                cs2 <= 1'b0;
+                di <= 1'b0;
+                data <= 'b0;
+            end
+
+        endcase
+    end
+end
+
+endmodule
