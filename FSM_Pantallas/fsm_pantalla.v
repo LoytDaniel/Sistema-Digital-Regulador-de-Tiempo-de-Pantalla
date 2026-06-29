@@ -41,13 +41,17 @@ always @(*) begin
             else state=PASSWORD;
         end
         MENU: begin
-            
+            if (exit) state=KIDS;
+            else if (sel==) state=MENU;
+            else state=PASSWORD;
         end
         ADULT: begin
-            
+            if (exit) state=MENU;
+            else state=ADULT;
         end
         SETTINGS: begin
-            
+            if (exit) state=MENU;
+            else state=SETTINGS;
         end
 
     endcase
@@ -57,19 +61,39 @@ end
 always @(*) begin
     case (state)
         KIDS: begin
-            
+            kids=1;
+            password=0;
+            menu=0;
+            adult=0;
+            setting=0;
         end
         PASSWORD: begin
-            
+            kids=0;
+            password=1;
+            menu=0;
+            adult=0;
+            setting=0;
         end
         MENU: begin
-            
+            kids=0;
+            password=0;
+            menu=1;
+            adult=0;
+            setting=0;
         end
         ADULT: begin
-            
+            kids=0;
+            password=0;
+            menu=0;
+            adult=1;
+            setting=0;
         end
         SETTINGS: begin
-            
+            kids=0;
+            password=0;
+            menu=0;
+            adult=0;
+            setting=1;
         end
 
     endcase
