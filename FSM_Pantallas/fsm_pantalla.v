@@ -42,8 +42,9 @@ always @(*) begin
         end
         MENU: begin
             if (exit) state=KIDS;
-            else if (sel==) state=MENU;
-            else state=PASSWORD;
+            else if (sel==2'b01) state=ADULT;
+            else if (sel==2'b10) state=SETTINGS;
+            else state=MENU;
         end
         ADULT: begin
             if (exit) state=MENU;
