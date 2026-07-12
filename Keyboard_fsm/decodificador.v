@@ -19,22 +19,22 @@ always @(posedge clk) begin
             {2'b00, 4'b0001}: salida <= 4'h1;
             {2'b00, 4'b0010}: salida <= 4'h2;
             {2'b00, 4'b0100}: salida <= 4'h3;
-            {2'b00, 4'b1000}: salida <= 4'hA;
+            {2'b00, 4'b1000}: salida <= 4'hA; //Accept
 
             {2'b01, 4'b0001}: salida <= 4'h4;
             {2'b01, 4'b0010}: salida <= 4'h5;
             {2'b01, 4'b0100}: salida <= 4'h6;
-            {2'b01, 4'b1000}: salida <= 4'hB;
+            {2'b01, 4'b1000}: salida <= 4'hB; //Delete
 
             {2'b10, 4'b0001}: salida <= 4'h7;
             {2'b10, 4'b0010}: salida <= 4'h8;
             {2'b10, 4'b0100}: salida <= 4'h9;
-            {2'b10, 4'b1000}: salida <= 4'hC;
+            {2'b10, 4'b1000}: salida <= 4'hF;
 
             {2'b11, 4'b0001}: salida <= 4'hE;
             {2'b11, 4'b0010}: salida <= 4'h0;
             {2'b11, 4'b0100}: salida <= 4'hF;
-            {2'b11, 4'b1000}: salida <= 4'hD;
+            {2'b11, 4'b1000}: salida <= 4'hF;
 
              // aqui poner las otras dos teclas para aceptar y cancelar
             default: salida <= salida; // Ninguna tecla presionada o combinación no válida
