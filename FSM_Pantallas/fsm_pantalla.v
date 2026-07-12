@@ -1,24 +1,26 @@
 module fsm_pantalla (
-    input setting,
+    input main_menu,
+    input clk,
+    input reset,
     input exit, //pooner exits independientes?
     input correct_password,
     input [1:0] sel,
 
-    output kids,
-    output password,
-    output menu,
-    output adult,
-    output setting
+    output reg kids,
+    output reg password,
+    output reg menu,
+    output reg adult,
+    output reg setting
 );
 
 // Estados (pantallas)
-localparam KIDS = 3'd0;
-localparam PASSWORD = 3'd1;
-localparam MENU = 3'd2; //nose
-localparam ADULT = 3'd3;
-localparam SETTINGS = 3'd4;
+localparam KIDS = 3'b000;
+localparam PASSWORD = 3'b001;
+localparam MENU = 3'b010; //nose
+localparam ADULT = 3'b011;
+localparam SETTINGS = 3'b100;
 
-reg [1:0] state, next_state;
+reg [2:0] state, next_state;
 
 always @(posedge clk or posedge reset) begin
     if (reset) begin
@@ -32,7 +34,7 @@ always @(*) begin
     next_state = state; 
     case (state)
         KIDS: begin
-            if (settiing) state=PASSWORD;
+            if (main_menu) state=PASSWORD;
             else state=KIDS;
         end
         PASSWORD: begin
