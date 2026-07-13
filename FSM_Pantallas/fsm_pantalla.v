@@ -1,4 +1,4 @@
-module fsm_pantalla (
+module Fsm_pantalla (
     input main_menu,
     input clk,
     input reset,

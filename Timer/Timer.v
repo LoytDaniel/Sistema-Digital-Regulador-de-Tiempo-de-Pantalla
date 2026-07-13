@@ -94,15 +94,21 @@ always @(posedge clk_10ms) begin
                 off_enable <= 1'b1;
 
             end else begin
-                left_time[0] <= (limit_time_minute - timer_minute) % 60;
-                left_time[1] <= (limit_time_minute - timer_minute) / 60;
+                left_time[0] <= (limit_time_minute - timer_minute) % 60; //minutos
+                left_time[1] <= (limit_time_minute - timer_minute) / 60; //horas
                 off_enable <= 1'b0;
             end
 
         end
         
     end else begin
-        left_time_saved=timer_minute;
+
+        if (~temp_enable) begin
+            left_time[0] <= 7'd0;
+            left_time[1] <= 7'd0;
+        end else begin
+            left_time_saved=timer_minute;
+        end
         subtract_enable <= 1'b0;
         off_enable <= 1'b1;
     end
