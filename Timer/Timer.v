@@ -6,10 +6,10 @@ module Timer #(
     input start, pause,
     input kids,
     input temp_enable,
-    input [6:0] current_time [0:1],
-    input [6:0] limit_time [0:1],
+    input [7:0] current_time [0:1],
+    input [7:0] limit_time [0:1],
 
-    output reg [6:0] left_time [0:1],
+    output reg [7:0] left_time [0:1],
     output reg off_enable 
 );
 
@@ -73,8 +73,8 @@ always @(posedge clk_10ms) begin
 
     if (reset) begin //usarlo cuando paso un dia y que vuelva todo a 0
 
-        left_time[0] <= 7'd0;
-        left_time[1] <= 7'd0;
+        left_time[0] <= 8'd0;
+        left_time[1] <= 8'd0;
         off_enable <= 1'b0;
         subtract_enable <= 1'b0;
         timer_minute <= 11'd0;
@@ -88,8 +88,8 @@ always @(posedge clk_10ms) begin
             timer_minute=current_time_minute-start_time_minute+left_time_saved;
 
             if (timer_minute >= limit_time_minute) begin
-                left_time[0] <= 7'd0;
-                left_time[1] <= 7'd0;
+                left_time[0] <= 8'd0;
+                left_time[1] <= 8'd0;
                 subtract_enable <= 1'b0;
                 off_enable <= 1'b1;
 
@@ -104,8 +104,8 @@ always @(posedge clk_10ms) begin
     end else begin
 
         if (~temp_enable) begin
-            left_time[0] <= 7'd0;
-            left_time[1] <= 7'd0;
+            left_time[0] <= 8'd0;
+            left_time[1] <= 8'd0;
         end else begin
             left_time_saved=timer_minute;
         end
@@ -116,9 +116,9 @@ end
 
 
 function [10:0] minutes;
-    input [6:0] hour, minute;
+    input [7:0] hour, minute;
     begin
-        minutes = minute[3:0] + minute[6:4]*10 + hour[3:0]*60 + hour[6:4]*600;
+        minutes = minute[3:0] + minute[7:4]*10 + hour[3:0]*60 + hour[7:4]*600;
     end
     
 endfunction
