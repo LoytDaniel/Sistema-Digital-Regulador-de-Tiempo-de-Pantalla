@@ -9,11 +9,12 @@ module Timer #(
     input [7:0] current_time [0:1],
     input [7:0] limit_time [0:1],
 
-    output reg [7:0] left_time [0:1],
+    output reg [7:0] left_time_BCD [0:1],
     output reg off_enable 
 );
 
 reg [10:0] start_time_minute, current_time_minute, timer_minute, limit_time_minute, left_time_saved;
+reg [7:0] left_time [0:1];
 reg subtract_enable;
 wire pause_cleaned, start_cleaned;
 
@@ -47,6 +48,14 @@ always @(*)begin
         .button_in(pause),
         .button_out(pause_cleaned)
     );
+
+    Bin_to_BCD B1(
+        .hr_in(left_time[1]),
+        .min_in(left_time[0]),
+        .hr_out(left_time_BCD[1]),
+        .min_out(left_time_BCD[0]),
+    );
+
 end
 
 // Intancia para detener y continuar el temporizador
