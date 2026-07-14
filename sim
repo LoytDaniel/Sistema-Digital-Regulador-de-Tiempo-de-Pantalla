@@ -1,0 +1,1427 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000024547480ee0 .scope module, "password_menu_tb" "password_menu_tb" 2 19;
+ .timescale -9 -12;
+v00000245474e5350_0 .var "Aceptar", 0 0;
+v00000245474e5df0_0 .var "Borrar", 0 0;
+v00000245474e53f0_0 .var "Salir", 0 0;
+v00000245474e5490_0 .var "clk", 0 0;
+v00000245474e61b0_0 .net "correct_password", 0 0, v00000245474e55d0_0;  1 drivers
+v00000245474e67f0_0 .var "correct_seen", 0 0;
+v00000245474e6570_0 .var/i "errors", 31 0;
+v00000245474e6610_0 .net "exit", 0 0, v00000245474e6930_0;  1 drivers
+v00000245474e5ad0_0 .var "exit_seen", 0 0;
+v00000245474e5710_0 .var "key_out", 3 0;
+v00000245474e57b0_0 .var "password", 0 0;
+v00000245474e5a30_0 .net "puntero_digitos", 2 0, v00000245474e6c50_0;  1 drivers
+v00000245474e6890_0 .var "push_button", 0 0;
+v00000245474e5850_0 .var "rst", 0 0;
+S_0000024547434b10 .scope task, "check_eq" "check_eq" 2 126, 2 126 0, S_0000024547480ee0;
+ .timescale -9 -12;
+v000002454742fd30_0 .var "expected", 2 0;
+v000002454742f830_0 .var "got", 2 0;
+v000002454742fc90_0 .var "msg", 511 0;
+TD_password_menu_tb.check_eq ;
+    %load/vec4 v000002454742f830_0;
+    %load/vec4 v000002454742fd30_0;
+    %cmp/e;
+    %jmp/0xz  T_0.0, 6;
+    %vpi_call 2 129 "$display", "[OK]    %0s (puntero_digitos=%0d)", v000002454742fc90_0, v000002454742f830_0 {0 0 0};
+    %jmp T_0.1;
+T_0.0 ;
+    %vpi_call 2 131 "$display", "[FALLO] %0s (esperado=%0d, obtenido=%0d)", v000002454742fc90_0, v000002454742fd30_0, v000002454742f830_0 {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_0.1 ;
+    %end;
+S_000002454746b5c0 .scope module, "dut" "password_menu" 2 49, 3 4 0, S_0000024547480ee0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /INPUT 1 "password";
+    .port_info 3 /INPUT 4 "key_out";
+    .port_info 4 /INPUT 1 "push_button";
+    .port_info 5 /INPUT 1 "Aceptar";
+    .port_info 6 /INPUT 1 "Borrar";
+    .port_info 7 /INPUT 1 "Salir";
+    .port_info 8 /OUTPUT 1 "correct_password";
+    .port_info 9 /OUTPUT 1 "exit";
+    .port_info 10 /OUTPUT 3 "puntero_digitos";
+P_0000024547475d20 .param/l "DEFAULT_PASSWORD" 0 3 5, C4<0001001000110100>;
+L_0000024547429f00 .functor NOT 1, v00000245474e6430_0, C4<0>, C4<0>, C4<0>;
+L_0000024547429c60 .functor AND 1, v00000245474e6890_0, L_0000024547429f00, C4<1>, C4<1>;
+L_0000024547429e20 .functor NOT 1, v000002454742f970_0, C4<0>, C4<0>, C4<0>;
+L_000002454742a050 .functor AND 1, v00000245474e5350_0, L_0000024547429e20, C4<1>, C4<1>;
+L_0000024547429cd0 .functor NOT 1, v000002454742ef70_0, C4<0>, C4<0>, C4<0>;
+L_000002454742a440 .functor AND 1, v00000245474e5df0_0, L_0000024547429cd0, C4<1>, C4<1>;
+L_000002454742a4b0 .functor NOT 1, v000002454742f5b0_0, C4<0>, C4<0>, C4<0>;
+L_0000024547429f70 .functor AND 1, v00000245474e53f0_0, L_000002454742a4b0, C4<1>, C4<1>;
+L_000002454742a670 .functor AND 1, v00000245474e57b0_0, L_0000024547429c60, C4<1>, C4<1>;
+L_000002454742a520 .functor AND 1, L_000002454742a670, L_00000245474e58f0, C4<1>, C4<1>;
+L_000002454742a210 .functor AND 1, L_000002454742a520, L_00000245474e6d90, C4<1>, C4<1>;
+v000002454742fdd0_0 .net "Aceptar", 0 0, v00000245474e5350_0;  1 drivers
+v000002454742f970_0 .var "Aceptar_d", 0 0;
+v000002454742f010_0 .net "Aceptar_re", 0 0, L_000002454742a050;  1 drivers
+v000002454742fe70_0 .net "Borrar", 0 0, v00000245474e5df0_0;  1 drivers
+v000002454742ef70_0 .var "Borrar_d", 0 0;
+v000002454742f510_0 .net "Borrar_re", 0 0, L_000002454742a440;  1 drivers
+v000002454742f1f0_0 .var "D0", 3 0;
+v000002454742f290_0 .var "D1", 3 0;
+v000002454742fb50_0 .var "D2", 3 0;
+v000002454742f330_0 .var "D3", 3 0;
+v000002454742f650_0 .net "Salir", 0 0, v00000245474e53f0_0;  1 drivers
+v000002454742f5b0_0 .var "Salir_d", 0 0;
+v000002454742f6f0_0 .net "Salir_re", 0 0, L_0000024547429f70;  1 drivers
+v00000245474e69d0_0 .net *"_ivl_0", 0 0, L_0000024547429f00;  1 drivers
+v00000245474e6070_0 .net *"_ivl_12", 0 0, L_000002454742a4b0;  1 drivers
+L_00000245474f0088 .functor BUFT 1, C4<1111>, C4<0>, C4<0>, C4<0>;
+v00000245474e5530_0 .net/2u *"_ivl_16", 3 0, L_00000245474f0088;  1 drivers
+v00000245474e6a70_0 .net *"_ivl_21", 0 0, L_000002454742a670;  1 drivers
+v00000245474e6250_0 .net *"_ivl_23", 0 0, L_000002454742a520;  1 drivers
+L_00000245474f00d0 .functor BUFT 1, C4<100>, C4<0>, C4<0>, C4<0>;
+v00000245474e6b10_0 .net/2u *"_ivl_24", 2 0, L_00000245474f00d0;  1 drivers
+v00000245474e7150_0 .net *"_ivl_26", 0 0, L_00000245474e6d90;  1 drivers
+v00000245474e5f30_0 .net *"_ivl_4", 0 0, L_0000024547429e20;  1 drivers
+v00000245474e5cb0_0 .net *"_ivl_8", 0 0, L_0000024547429cd0;  1 drivers
+v00000245474e6ed0_0 .net "acepta_digito", 0 0, L_000002454742a210;  1 drivers
+v00000245474e6bb0_0 .net "clk", 0 0, v00000245474e5490_0;  1 drivers
+v00000245474e55d0_0 .var "correct_password", 0 0;
+v00000245474e6750_0 .net "entered_password", 15 0, L_00000245474e5990;  1 drivers
+v00000245474e6930_0 .var "exit", 0 0;
+v00000245474e5fd0_0 .net "is_digit", 0 0, L_00000245474e58f0;  1 drivers
+v00000245474e70b0_0 .net "key_out", 3 0, v00000245474e5710_0;  1 drivers
+v00000245474e6e30_0 .net "password", 0 0, v00000245474e57b0_0;  1 drivers
+v00000245474e6c50_0 .var "puntero_digitos", 2 0;
+v00000245474e5e90_0 .net "push_button", 0 0, v00000245474e6890_0;  1 drivers
+v00000245474e6430_0 .var "push_button_d", 0 0;
+v00000245474e62f0_0 .net "push_button_re", 0 0, L_0000024547429c60;  1 drivers
+v00000245474e5d50_0 .net "rst", 0 0, v00000245474e5850_0;  1 drivers
+E_0000024547475ea0 .event posedge, v00000245474e6bb0_0;
+L_00000245474e58f0 .cmp/ne 4, v00000245474e5710_0, L_00000245474f0088;
+L_00000245474e6d90 .cmp/gt 3, L_00000245474f00d0, v00000245474e6c50_0;
+L_00000245474e5990 .concat [ 4 4 4 4], v000002454742f1f0_0, v000002454742f290_0, v000002454742fb50_0, v000002454742f330_0;
+S_0000024547440e80 .scope task, "press_Aceptar" "press_Aceptar" 2 87, 2 87 0, S_0000024547480ee0;
+ .timescale -9 -12;
+v00000245474e6110_0 .var/i "hold_cycles", 31 0;
+v00000245474e52b0_0 .var/i "i", 31 0;
+E_0000024547476620 .event negedge, v00000245474e6bb0_0;
+TD_password_menu_tb.press_Aceptar ;
+    %wait E_0000024547476620;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v00000245474e5710_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e5350_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000245474e52b0_0, 0, 32;
+T_1.2 ;
+    %load/vec4 v00000245474e52b0_0;
+    %load/vec4 v00000245474e6110_0;
+    %cmp/s;
+    %jmp/0xz T_1.3, 5;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e52b0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e52b0_0, 0, 32;
+    %jmp T_1.2;
+T_1.3 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5350_0, 0, 1;
+    %wait E_0000024547476620;
+    %end;
+S_0000024547441010 .scope task, "press_Borrar" "press_Borrar" 2 100, 2 100 0, S_0000024547480ee0;
+ .timescale -9 -12;
+v00000245474e6cf0_0 .var/i "hold_cycles", 31 0;
+v00000245474e6390_0 .var/i "i", 31 0;
+TD_password_menu_tb.press_Borrar ;
+    %wait E_0000024547476620;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v00000245474e5710_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e5df0_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000245474e6390_0, 0, 32;
+T_2.4 ;
+    %load/vec4 v00000245474e6390_0;
+    %load/vec4 v00000245474e6cf0_0;
+    %cmp/s;
+    %jmp/0xz T_2.5, 5;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e6390_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6390_0, 0, 32;
+    %jmp T_2.4;
+T_2.5 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5df0_0, 0, 1;
+    %wait E_0000024547476620;
+    %end;
+S_00000245473e6060 .scope task, "press_Salir" "press_Salir" 2 113, 2 113 0, S_0000024547480ee0;
+ .timescale -9 -12;
+v00000245474e5670_0 .var/i "hold_cycles", 31 0;
+v00000245474e6f70_0 .var/i "i", 31 0;
+TD_password_menu_tb.press_Salir ;
+    %wait E_0000024547476620;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v00000245474e5710_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e53f0_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000245474e6f70_0, 0, 32;
+T_3.6 ;
+    %load/vec4 v00000245474e6f70_0;
+    %load/vec4 v00000245474e5670_0;
+    %cmp/s;
+    %jmp/0xz T_3.7, 5;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e6f70_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6f70_0, 0, 32;
+    %jmp T_3.6;
+T_3.7 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e53f0_0, 0, 1;
+    %wait E_0000024547476620;
+    %end;
+S_00000245473e61f0 .scope task, "press_digit" "press_digit" 2 73, 2 73 0, S_0000024547480ee0;
+ .timescale -9 -12;
+v00000245474e7010_0 .var "digit", 3 0;
+v00000245474e64d0_0 .var/i "hold_cycles", 31 0;
+v00000245474e66b0_0 .var/i "i", 31 0;
+TD_password_menu_tb.press_digit ;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e7010_0;
+    %store/vec4 v00000245474e5710_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e6890_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000245474e66b0_0, 0, 32;
+T_4.8 ;
+    %load/vec4 v00000245474e66b0_0;
+    %load/vec4 v00000245474e64d0_0;
+    %cmp/s;
+    %jmp/0xz T_4.9, 5;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e66b0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e66b0_0, 0, 32;
+    %jmp T_4.8;
+T_4.9 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e6890_0, 0, 1;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v00000245474e5710_0, 0, 4;
+    %wait E_0000024547476620;
+    %end;
+    .scope S_000002454746b5c0;
+T_5 ;
+    %wait E_0000024547475ea0;
+    %load/vec4 v00000245474e5d50_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_5.0, 8;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000245474e6430_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v000002454742f970_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v000002454742ef70_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v000002454742f5b0_0, 0;
+    %jmp T_5.1;
+T_5.0 ;
+    %load/vec4 v00000245474e5e90_0;
+    %assign/vec4 v00000245474e6430_0, 0;
+    %load/vec4 v000002454742fdd0_0;
+    %assign/vec4 v000002454742f970_0, 0;
+    %load/vec4 v000002454742fe70_0;
+    %assign/vec4 v000002454742ef70_0, 0;
+    %load/vec4 v000002454742f650_0;
+    %assign/vec4 v000002454742f5b0_0, 0;
+T_5.1 ;
+    %jmp T_5;
+    .thread T_5;
+    .scope S_000002454746b5c0;
+T_6 ;
+    %wait E_0000024547475ea0;
+    %load/vec4 v00000245474e5d50_0;
+    %flag_set/vec4 8;
+    %jmp/1 T_6.2, 8;
+    %load/vec4 v00000245474e6e30_0;
+    %nor/r;
+    %flag_set/vec4 9;
+    %flag_or 8, 9;
+T_6.2;
+    %jmp/0xz  T_6.0, 8;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742f330_0, 0;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742fb50_0, 0;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742f290_0, 0;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742f1f0_0, 0;
+    %pushi/vec4 0, 0, 3;
+    %assign/vec4 v00000245474e6c50_0, 0;
+    %jmp T_6.1;
+T_6.0 ;
+    %load/vec4 v000002454742f510_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_6.3, 8;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742f330_0, 0;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742fb50_0, 0;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742f290_0, 0;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002454742f1f0_0, 0;
+    %pushi/vec4 0, 0, 3;
+    %assign/vec4 v00000245474e6c50_0, 0;
+    %jmp T_6.4;
+T_6.3 ;
+    %load/vec4 v00000245474e6ed0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_6.5, 8;
+    %load/vec4 v00000245474e6c50_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 3;
+    %cmp/u;
+    %jmp/1 T_6.7, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 3;
+    %cmp/u;
+    %jmp/1 T_6.8, 6;
+    %dup/vec4;
+    %pushi/vec4 2, 0, 3;
+    %cmp/u;
+    %jmp/1 T_6.9, 6;
+    %dup/vec4;
+    %pushi/vec4 3, 0, 3;
+    %cmp/u;
+    %jmp/1 T_6.10, 6;
+    %jmp T_6.12;
+T_6.7 ;
+    %load/vec4 v00000245474e70b0_0;
+    %assign/vec4 v000002454742f330_0, 0;
+    %jmp T_6.12;
+T_6.8 ;
+    %load/vec4 v00000245474e70b0_0;
+    %assign/vec4 v000002454742fb50_0, 0;
+    %jmp T_6.12;
+T_6.9 ;
+    %load/vec4 v00000245474e70b0_0;
+    %assign/vec4 v000002454742f290_0, 0;
+    %jmp T_6.12;
+T_6.10 ;
+    %load/vec4 v00000245474e70b0_0;
+    %assign/vec4 v000002454742f1f0_0, 0;
+    %jmp T_6.12;
+T_6.12 ;
+    %pop/vec4 1;
+    %load/vec4 v00000245474e6c50_0;
+    %addi 1, 0, 3;
+    %assign/vec4 v00000245474e6c50_0, 0;
+T_6.5 ;
+T_6.4 ;
+T_6.1 ;
+    %jmp T_6;
+    .thread T_6;
+    .scope S_000002454746b5c0;
+T_7 ;
+    %wait E_0000024547475ea0;
+    %load/vec4 v00000245474e5d50_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_7.0, 8;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000245474e55d0_0, 0;
+    %jmp T_7.1;
+T_7.0 ;
+    %load/vec4 v00000245474e6e30_0;
+    %flag_set/vec4 9;
+    %flag_get/vec4 9;
+    %jmp/0 T_7.4, 9;
+    %load/vec4 v000002454742f010_0;
+    %and;
+T_7.4;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_7.2, 8;
+    %load/vec4 v00000245474e6750_0;
+    %pushi/vec4 4660, 0, 16;
+    %cmp/e;
+    %flag_get/vec4 4;
+    %assign/vec4 v00000245474e55d0_0, 0;
+    %jmp T_7.3;
+T_7.2 ;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000245474e55d0_0, 0;
+T_7.3 ;
+T_7.1 ;
+    %jmp T_7;
+    .thread T_7;
+    .scope S_000002454746b5c0;
+T_8 ;
+    %wait E_0000024547475ea0;
+    %load/vec4 v00000245474e5d50_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_8.0, 8;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v00000245474e6930_0, 0;
+    %jmp T_8.1;
+T_8.0 ;
+    %load/vec4 v00000245474e6e30_0;
+    %flag_set/vec4 8;
+    %flag_get/vec4 8;
+    %jmp/0 T_8.2, 8;
+    %load/vec4 v000002454742f6f0_0;
+    %and;
+T_8.2;
+    %assign/vec4 v00000245474e6930_0, 0;
+T_8.1 ;
+    %jmp T_8;
+    .thread T_8;
+    .scope S_0000024547480ee0;
+T_9 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+    %end;
+    .thread T_9;
+    .scope S_0000024547480ee0;
+T_10 ;
+    %wait E_0000024547475ea0;
+    %load/vec4 v00000245474e61b0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_10.0, 8;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v00000245474e67f0_0, 0;
+T_10.0 ;
+    %load/vec4 v00000245474e6610_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_10.2, 8;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v00000245474e5ad0_0, 0;
+T_10.2 ;
+    %jmp T_10;
+    .thread T_10;
+    .scope S_0000024547480ee0;
+T_11 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5490_0, 0, 1;
+    %end;
+    .thread T_11;
+    .scope S_0000024547480ee0;
+T_12 ;
+    %delay 5000, 0;
+    %load/vec4 v00000245474e5490_0;
+    %inv;
+    %store/vec4 v00000245474e5490_0, 0, 1;
+    %jmp T_12;
+    .thread T_12;
+    .scope S_0000024547480ee0;
+T_13 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e5850_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e57b0_0, 0, 1;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v00000245474e5710_0, 0, 4;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e6890_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5350_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5df0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e53f0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5ad0_0, 0, 1;
+    %pushi/vec4 2, 0, 32;
+T_13.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_13.1, 5;
+    %jmp/1 T_13.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %wait E_0000024547476620;
+    %jmp T_13.0;
+T_13.1 ;
+    %pop/vec4 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5850_0, 0, 1;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 28789, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1853121906, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1868522601, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931503982, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768122721, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543518240, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 807433330, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1634934898, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1702061428, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %vpi_call 2 157 "$display", "--- Prueba 1: contrasena correcta (1-2-3-4) ---" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_13.2, 6;
+    %vpi_call 2 164 "$display", "[OK]    correct_password=1 con clave 1234" {0 0 0};
+    %jmp T_13.3;
+T_13.2 ;
+    %vpi_call 2 165 "$display", "[FALLO] correct_password no se activo con clave 1234" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.3 ;
+    %vpi_call 2 168 "$display", "--- Prueba 2: tecla sostenida (rebote) solo cuenta una vez ---" {0 0 0};
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6cf0_0, 0, 32;
+    %fork TD_password_menu_tb.press_Borrar, S_0000024547441010;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 5, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_13.4, 6;
+    %vpi_call 2 177 "$display", "[OK]    tecla sostenida no genero digitos duplicados (clave 1234 sigue correcta)" {0 0 0};
+    %jmp T_13.5;
+T_13.4 ;
+    %vpi_call 2 178 "$display", "[FALLO] la tecla sostenida genero lecturas repetidas" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.5 ;
+    %vpi_call 2 181 "$display", "--- Prueba 3: Borrar borra TODO y reinicia la captura ---" {0 0 0};
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6cf0_0, 0, 32;
+    %fork TD_password_menu_tb.press_Borrar, S_0000024547441010;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 7631457, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931493999, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1920098674, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 740323445, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1853121906, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1868522601, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931507317, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1701607013, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543236144, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_13.6, 6;
+    %vpi_call 2 193 "$display", "[OK]    tras Borrar, ingresar 1234 fue correcto (no quedaron residuos)" {0 0 0};
+    %jmp T_13.7;
+T_13.6 ;
+    %vpi_call 2 194 "$display", "[FALLO] Borrar no reinicio correctamente la captura" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.7 ;
+    %vpi_call 2 197 "$display", "--- Prueba 4: contrasena incorrecta ---" {0 0 0};
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6cf0_0, 0, 32;
+    %fork TD_password_menu_tb.press_Borrar, S_0000024547441010;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 0, 0, 1;
+    %jmp/0xz  T_13.8, 6;
+    %vpi_call 2 205 "$display", "[OK]    clave 9999 fue rechazada correctamente" {0 0 0};
+    %jmp T_13.9;
+T_13.8 ;
+    %vpi_call 2 206 "$display", "[FALLO] clave 9999 fue aceptada incorrectamente" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.9 ;
+    %vpi_call 2 209 "$display", "--- Prueba 5: mas de 4 digitos -> los adicionales se ignoran ---" {0 0 0};
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6cf0_0, 0, 32;
+    %fork TD_password_menu_tb.press_Borrar, S_0000024547441010;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 4, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 28789, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1853121906, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1868522601, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931506533, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543387502, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734700129, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543518240, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 874542194, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1634934885, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1814049908, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1864393833, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_13.10, 6;
+    %vpi_call 2 220 "$display", "[OK]    con 6 digitos (1,2,3,4,9,9) prevalecio 1234 (5to y 6to ignorados)" {0 0 0};
+    %jmp T_13.11;
+T_13.10 ;
+    %vpi_call 2 221 "$display", "[FALLO] los digitos extra no fueron ignorados correctamente" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.11 ;
+    %vpi_call 2 224 "$display", "--- Prueba 6: tecla Salir genera pulso exit ---" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5ad0_0, 0, 1;
+    %pushi/vec4 3, 0, 32;
+    %store/vec4 v00000245474e5670_0, 0, 32;
+    %fork TD_password_menu_tb.press_Salir, S_00000245473e6060;
+    %join;
+    %load/vec4 v00000245474e5ad0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_13.12, 6;
+    %vpi_call 2 227 "$display", "[OK]    'exit' se activo al presionar Salir ('*')" {0 0 0};
+    %jmp T_13.13;
+T_13.12 ;
+    %vpi_call 2 228 "$display", "[FALLO] 'exit' no se activo al presionar Salir" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.13 ;
+    %vpi_call 2 231 "$display", "--- Prueba 7: evolucion de puntero_digitos ---" {0 0 0};
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6cf0_0, 0, 32;
+    %fork TD_password_menu_tb.press_Borrar, S_0000024547441010;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1886744180, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1701998431, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1684629353, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1953461024, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1025519664, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 807428462, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1952805664, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1684349033, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1852273253, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1935766048, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1851876449, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 7, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 1, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 112, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1970173029, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1919901540, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768384884, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869815869, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 540028977, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 544502369, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931489637, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1914725481, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 2, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 112, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1970173029, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1919901540, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768384884, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869815869, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 540029232, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 544502369, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931489892, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1864393833, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 3, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 112, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1970173029, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1919901540, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768384884, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869815869, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 540029233, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 544502369, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931490149, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1914725481, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 4, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 112, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1970173029, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1919901540, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768384884, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869815869, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 540094512, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 544502369, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931490420, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1864393833, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 4, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 28789, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1853121906, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1868522601, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931506537, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1735746848, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1701716017, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 808460404, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1918989088, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1684629353, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1953439845, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 2020897377, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %vpi_call 2 246 "$display", "--- Prueba 8: alternar password borra todo automaticamente ---" {0 0 0};
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6cf0_0, 0, 32;
+    %fork TD_password_menu_tb.press_Borrar, S_0000024547441010;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 3, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 112, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1970173029, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1919901540, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768384884, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869815869, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 540221537, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1853121907, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543450400, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1684370280, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1633839468, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1769234802, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543973664, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1885696884, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 4294947169, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e57b0_0, 0, 1;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 6384672, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1935764585, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1914710128, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1634956151, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869767741, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 808004640, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1936007266, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869771361, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 543257972, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869439348, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1768120685, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1701737573, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e5ad0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 25455, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1847619681, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1936947055, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1919171888, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 740322415, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931502697, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1734964335, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1931505263, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 544433440, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1667330164, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1970430318, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 0, 0, 1;
+    %jmp/0xz  T_13.14, 6;
+    %vpi_call 2 268 "$display", "[OK]    con password=0, Aceptar no genero correct_password" {0 0 0};
+    %jmp T_13.15;
+T_13.14 ;
+    %vpi_call 2 269 "$display", "[FALLO] Aceptar funciono estando deshabilitado" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.15 ;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e5670_0, 0, 32;
+    %fork TD_password_menu_tb.press_Salir, S_00000245473e6060;
+    %join;
+    %load/vec4 v00000245474e5ad0_0;
+    %cmpi/e 0, 0, 1;
+    %jmp/0xz  T_13.16, 6;
+    %vpi_call 2 272 "$display", "[OK]    con password=0, Salir no genero exit" {0 0 0};
+    %jmp T_13.17;
+T_13.16 ;
+    %vpi_call 2 273 "$display", "[FALLO] Salir funciono estando deshabilitado" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.17 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000245474e57b0_0, 0, 1;
+    %wait E_0000024547476620;
+    %load/vec4 v00000245474e5a30_0;
+    %store/vec4 v000002454742f830_0, 0, 3;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v000002454742fd30_0, 0, 3;
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 0, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 24940, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 544367969, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1668573558, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1634869360, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1634956151, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1869767741, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 824975457, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1920098670, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1667309669, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1847603232, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 678193517, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %pushi/vec4 1885957929, 0, 32; draw_string_vec4
+    %concat/vec4; draw_string_vec4
+    %store/vec4 v000002454742fc90_0, 0, 512;
+    %fork TD_password_menu_tb.check_eq, S_0000024547434b10;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000245474e67f0_0, 0, 1;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v00000245474e7010_0, 0, 4;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e64d0_0, 0, 32;
+    %fork TD_password_menu_tb.press_digit, S_00000245473e61f0;
+    %join;
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v00000245474e6110_0, 0, 32;
+    %fork TD_password_menu_tb.press_Aceptar, S_0000024547440e80;
+    %join;
+    %load/vec4 v00000245474e67f0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_13.18, 6;
+    %vpi_call 2 286 "$display", "[OK]    al reactivar password=1, el modulo vuelve a funcionar normal" {0 0 0};
+    %jmp T_13.19;
+T_13.18 ;
+    %vpi_call 2 287 "$display", "[FALLO] el modulo no volvio a funcionar tras reactivar password" {0 0 0};
+    %load/vec4 v00000245474e6570_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000245474e6570_0, 0, 32;
+T_13.19 ;
+    %pushi/vec4 3, 0, 32;
+T_13.20 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_13.21, 5;
+    %jmp/1 T_13.21, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %wait E_0000024547476620;
+    %jmp T_13.20;
+T_13.21 ;
+    %pop/vec4 1;
+    %load/vec4 v00000245474e6570_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_13.22, 4;
+    %vpi_call 2 292 "$display", "\012>>> TODAS LAS PRUEBAS PASARON CORRECTAMENTE <<<" {0 0 0};
+    %jmp T_13.23;
+T_13.22 ;
+    %vpi_call 2 294 "$display", "\012>>> SE ENCONTRARON %0d FALLO(S) <<<", v00000245474e6570_0 {0 0 0};
+T_13.23 ;
+    %vpi_call 2 296 "$finish" {0 0 0};
+    %end;
+    .thread T_13;
+    .scope S_0000024547480ee0;
+T_14 ;
+    %vpi_call 2 301 "$dumpfile", "password_menu_tb.vcd" {0 0 0};
+    %vpi_call 2 302 "$dumpvars", 32'sb00000000000000000000000000000000, S_0000024547480ee0 {0 0 0};
+    %end;
+    .thread T_14;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "password_menu_tb.v";
+    "password_menu.v";
