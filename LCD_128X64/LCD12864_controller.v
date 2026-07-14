@@ -19,11 +19,12 @@ module LCD12864_controller #(
     parameter NUM_COLS = 64,
     parameter NUM_PAGES = 8,
     parameter DATA_BITS = 8,
-    parameter COUNT_MAX = 500
+    parameter COUNT_MAX = 500,
+    parameter NUM_DATA_ALL = 1024 // Datos gráficos: 2 chips × 8 páginas × 64 columnas = 1024 bytes
 )(
     input clk,
     input reset,
-    input ready_i,
+    input [DATA_BITS-1:0] graphic_mem [0:NUM_DATA_ALL-1],
     output reg di,      // Data/Instruction (0=cmd, 1=dato)
     output reg rw,      // Read/Write (siempre 0=write)
     output enable,  // Pulso de habilitación (= clk_16ms)
@@ -31,12 +32,6 @@ module LCD12864_controller #(
     output reg cs2,     // Chip Select lado derecho
     output reg [DATA_BITS-1:0] data     // Bus de datos 8 bits
 );
-
-// ---------------------------------------------------------------------------
-// Señal auxiliar: ready negado
-// ---------------------------------------------------------------------------
-wire nready_i;
-assign nready_i = ~ready_i;
 
 // ---------------------------------------------------------------------------
 // Comandos KS0108
@@ -64,21 +59,21 @@ reg [3:0] fsm_state;
 reg [3:0] next_state;
 
 // ---------------------------------------------------------------------------
-// Divisor de frecuencia → clk_16ms
+// Divisor de frecuencia → clk_10 microsegundos frecuencia de 100kHz
 // ---------------------------------------------------------------------------
 reg [$clog2(COUNT_MAX)-1:0] clk_counter;
-reg clk_16ms;
+reg clk_10;
 
 always @(posedge clk) begin
     if (clk_counter == COUNT_MAX - 1) begin
-        clk_16ms <= ~clk_16ms;
+        clk_10 <= ~clk_10;
         clk_counter <= 'b0;
     end else begin
         clk_counter <= clk_counter + 1;
     end
 end
 
-assign enable = clk_16ms;
+assign enable = clk_10;
 
 // ---------------------------------------------------------------------------
 // Contadores
@@ -90,13 +85,10 @@ reg [$clog2(NUM_PAGES):0] page_counter;    // Página actual (0..7)
 // ---------------------------------------------------------------------------
 // Memorias
 // ---------------------------------------------------------------------------
-// Datos gráficos: 2 chips × 8 páginas × 64 columnas = 1024 bytes
-// Disposición en data.txt (hex):
+// Disposición en los archivos de texto (hex):
 //   [0..511]   → chip 1: página 0 cols 0-63, página 1 cols 0-63 … página 7
 //   [512..1023]→ chip 2: ídem
-localparam NUM_DATA_ALL = NUM_COLS * NUM_PAGES * 2; // 1024
 
-reg [DATA_BITS-1:0] graphic_mem [0:NUM_DATA_ALL-1];
 reg [DATA_BITS-1:0] config_mem [0:NUM_COMMANDS-1];
 
 // ---------------------------------------------------------------------------
@@ -112,11 +104,8 @@ initial begin
     cs1 <= 1'b0;
     cs2 <= 1'b0;
     data <= 8'b0;
-    clk_16ms <= 1'b0;
+    clk_10 <= 1'b0;
     clk_counter <= 'b0;
-
-    // Cargar imagen/gráfico desde archivo (1024 bytes en hex)
-    $readmemh("data.txt", graphic_mem);
 
     // Secuencia de inicialización KS0108 (igual para CS1 y CS2)
     config_mem[0] <= SET_START_L0;  // Línea de inicio = 0
@@ -126,9 +115,9 @@ initial begin
 end
 
 // ---------------------------------------------------------------------------
-// Registro de estado (síncrono con clk_16ms)
+// Registro de estado (síncrono con clk_10)
 // ---------------------------------------------------------------------------
-always @(posedge clk_16ms) begin
+always @(posedge clk_10) begin
     if (reset == 1'b0)
         fsm_state <= IDLE;
     else
@@ -142,7 +131,7 @@ always @(*) begin
     case (fsm_state)
 
         IDLE:
-            next_state = nready_i ? CONFIG_CS1 : IDLE;
+            next_state = CONFIG_CS1;
 
         // --- Chip 1: inicialización ---
         CONFIG_CS1:
@@ -178,9 +167,9 @@ always @(*) begin
 end
 
 // ---------------------------------------------------------------------------
-// Lógica de salida y actualización de contadores (síncrono con clk_16ms)
+// Lógica de salida y actualización de contadores (síncrono con clk_10)
 // ---------------------------------------------------------------------------
-always @(posedge clk_16ms) begin
+always @(posedge clk_10) begin
     if (reset == 1'b0) begin
         command_counter <= 'b0;
         data_counter <= 'b0;
@@ -189,7 +178,6 @@ always @(posedge clk_16ms) begin
         cs1 <= 1'b1;
         cs2 <= 1'b1;
         data <= 'b0;
-        $readmemh("data.txt", graphic_mem);
     end else begin
         case (next_state)
 

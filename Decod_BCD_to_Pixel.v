@@ -1,6 +1,6 @@
-module Decod_rtc (
+module Decod_BCD_to_Pixel (
     input [3:0] bcd,
-    output reg [6:0] num_data [0:7]
+    output reg [7:0] num_data [0:6]
 );
 
 always @(*) begin
