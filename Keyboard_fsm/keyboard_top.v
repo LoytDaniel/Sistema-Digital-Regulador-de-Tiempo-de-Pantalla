@@ -1,4 +1,4 @@
-module top (
+module keyboard_top (
     input clk, reset,
     input [3:0] col,
 
