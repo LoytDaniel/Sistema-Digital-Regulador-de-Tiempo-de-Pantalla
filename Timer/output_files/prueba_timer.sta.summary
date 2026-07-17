@@ -1,0 +1,113 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'Timer:pt|clk_10ms'
+Slack : -40.893
+TNS   : -593.802
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : -10.294
+TNS   : -408.628
+
+Type  : Slow 1200mV 85C Model Setup 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : -8.769
+TNS   : -167.469
+
+Type  : Slow 1200mV 85C Model Hold 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : 0.432
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.445
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'Timer:pt|clk_10ms'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -194.823
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : -1.487
+TNS   : -93.681
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Timer:pt|clk_10ms'
+Slack : -1.487
+TNS   : -74.350
+
+Type  : Slow 1200mV 0C Model Setup 'Timer:pt|clk_10ms'
+Slack : -37.445
+TNS   : -542.403
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -9.406
+TNS   : -370.351
+
+Type  : Slow 1200mV 0C Model Setup 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : -7.982
+TNS   : -154.344
+
+Type  : Slow 1200mV 0C Model Hold 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : 0.381
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.397
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Timer:pt|clk_10ms'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -194.823
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : -1.487
+TNS   : -93.681
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Timer:pt|clk_10ms'
+Slack : -1.487
+TNS   : -74.350
+
+Type  : Fast 1200mV 0C Model Setup 'Timer:pt|clk_10ms'
+Slack : -16.912
+TNS   : -227.700
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -3.761
+TNS   : -103.178
+
+Type  : Fast 1200mV 0C Model Setup 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : -3.208
+TNS   : -39.930
+
+Type  : Fast 1200mV 0C Model Hold 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : 0.178
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.185
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Timer:pt|clk_10ms'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -141.028
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'DS1302_Top_prueba:comb_4|CLK_div:cl|clk_out'
+Slack : -1.000
+TNS   : -63.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Timer:pt|clk_10ms'
+Slack : -1.000
+TNS   : -50.000
+
+------------------------------------------------------------

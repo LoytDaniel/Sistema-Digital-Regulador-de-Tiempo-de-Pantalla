@@ -6,15 +6,15 @@ module Timer #(
     input start, pause,
     input kids,
     input temp_enable,
-    input [7:0] current_time [0:1],
-    input [7:0] limit_time [0:1],
+    input [7:0] current_time_H, current_time_M,
+    input [7:0] limit_time_H, limit_time_M,
 
-    output reg [7:0] left_time_BCD [0:1],
+    output [7:0] left_time_BCD_H, left_time_BCD_M,
     output reg off_enable 
 );
 
 reg [10:0] start_time_minute, current_time_minute, timer_minute, limit_time_minute, left_time_saved;
-reg [7:0] left_time [0:1];
+reg [5:0] left_time [0:1];
 reg subtract_enable;
 wire pause_cleaned, start_cleaned;
 
@@ -34,7 +34,6 @@ always @(posedge clk) begin
 end
 //---------------------------------------------------------------------------
 
-always @(*)begin
     FSM_button start_fsm (
         .clk(clk_10ms),
         .reset(reset),
@@ -49,33 +48,19 @@ always @(*)begin
         .button_out(pause_cleaned)
     );
 
-    Bin_to_BCD B1(
-        .hr_in(left_time[1]),
-        .min_in(left_time[0]),
-        .hr_out(left_time_BCD[1]),
-        .min_out(left_time_BCD[0]),
-    );
-
-end
-
 // Intancia para detener y continuar el temporizador
-always @(posedge start_cleaned) begin
-    if (kids) begin
-        if (~subtract_enable) begin
-            start_time_minute=minutes(current_time[1], current_time[0]);
-            limit_time_minute=minutes(limit_time[1], limit_time[0]);
-            subtract_enable <= 1'b1;
-        end
-    end 
+// Reemplaza los dos always de start_cleaned/pause_cleaned por esto:
+
+reg start_cleaned_d, pause_cleaned_d;
+
+always @(posedge clk_10ms) begin
+    start_cleaned_d <= start_cleaned;
+    pause_cleaned_d <= pause_cleaned;
 end
 
-always @(posedge pause_cleaned) begin
-    if (kids) begin
-        subtract_enable <= 1'b0;
-        left_time_saved=timer_minute;
-        off_enable <= 1'b1;
-    end
-end
+wire start_edge = start_cleaned & ~start_cleaned_d;
+wire pause_edge = pause_cleaned & ~pause_cleaned_d;
+
 
 
 always @(posedge clk_10ms) begin
@@ -88,13 +73,21 @@ always @(posedge clk_10ms) begin
         subtract_enable <= 1'b0;
         timer_minute <= 11'd0;
         left_time_saved <= 11'd0;
+    end else if (start_edge && kids && ~subtract_enable) begin
+        start_time_minute  <= minutes(current_time_H, current_time_M);
+        limit_time_minute  <= minutes(limit_time_H, limit_time_M);
+        subtract_enable    <= 1'b1;
 
+    end else if (pause_edge && kids) begin
+        subtract_enable  <= 1'b0;
+        left_time_saved  <= timer_minute;
+        off_enable       <= 1'b1;
     end else if (kids || temp_enable) begin
 
         if (subtract_enable) begin
 
-            current_time_minute=minutes(current_time[1],current_time[0]);
-            timer_minute=current_time_minute-start_time_minute+left_time_saved;
+            current_time_minute=minutes(current_time_H,current_time_M);
+            timer_minute=(current_time_minute-start_time_minute+left_time_saved);
 
             if (timer_minute >= limit_time_minute) begin
                 left_time[0] <= 8'd0;
@@ -116,7 +109,7 @@ always @(posedge clk_10ms) begin
             left_time[0] <= 8'd0;
             left_time[1] <= 8'd0;
         end else begin
-            left_time_saved=timer_minute;
+             left_time_saved <= timer_minute;
         end
         subtract_enable <= 1'b0;
         off_enable <= 1'b1;
@@ -131,5 +124,12 @@ function [10:0] minutes;
     end
     
 endfunction
+
+ Bin_to_BCD B1(
+        .hr_in(left_time[1]),
+        .min_in(left_time[0]),
+        .hr_out(left_time_BCD_H),
+        .min_out(left_time_BCD_M),
+    );
 
 endmodule
