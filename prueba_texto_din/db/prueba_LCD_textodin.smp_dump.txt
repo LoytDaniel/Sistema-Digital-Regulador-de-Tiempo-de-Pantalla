@@ -1,0 +1,32 @@
+
+State Machine - |prueba_lcd_din|LCD12864_controller_prueba1:inst|fsm_state
+Name fsm_state.NEXT_PG fsm_state.WR_DATA_CS2 fsm_state.SET_PG_CS2 fsm_state.CONFIG_CS2 fsm_state.WR_DATA_CS1 fsm_state.SET_PG_CS1 fsm_state.CONFIG_CS1 fsm_state.IDLE 
+fsm_state.IDLE 0 0 0 0 0 0 0 0 
+fsm_state.CONFIG_CS1 0 0 0 0 0 0 1 1 
+fsm_state.SET_PG_CS1 0 0 0 0 0 1 0 1 
+fsm_state.WR_DATA_CS1 0 0 0 0 1 0 0 1 
+fsm_state.CONFIG_CS2 0 0 0 1 0 0 0 1 
+fsm_state.SET_PG_CS2 0 0 1 0 0 0 0 1 
+fsm_state.WR_DATA_CS2 0 1 0 0 0 0 0 1 
+fsm_state.NEXT_PG 1 0 0 0 0 0 0 1 
+
+State Machine - |prueba_lcd_din|DS1302_Top_p:DS1302_Top_p_inst|DS1302_controller:Controller|state
+Name state.TERMINATE state.STO_BURST state.RD_BURST state.WR_SINGLE state.WR_SINGLE_PREP state.WR_BURST state.WR_BURST_PREP state.CNT_RST state.WR_ADDR state.WR_ADDR_PREP state.IDLE 
+state.IDLE 0 0 0 0 0 0 0 0 0 0 0 
+state.WR_ADDR_PREP 0 0 0 0 0 0 0 0 0 1 1 
+state.WR_ADDR 0 0 0 0 0 0 0 0 1 0 1 
+state.CNT_RST 0 0 0 0 0 0 0 1 0 0 1 
+state.WR_BURST_PREP 0 0 0 0 0 0 1 0 0 0 1 
+state.WR_BURST 0 0 0 0 0 1 0 0 0 0 1 
+state.WR_SINGLE_PREP 0 0 0 0 1 0 0 0 0 0 1 
+state.WR_SINGLE 0 0 0 1 0 0 0 0 0 0 1 
+state.RD_BURST 0 0 1 0 0 0 0 0 0 0 1 
+state.STO_BURST 0 1 0 0 0 0 0 0 0 0 1 
+state.TERMINATE 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |prueba_lcd_din|DS1302_Top_p:DS1302_Top_p_inst|Time_setting:time_set|state
+Name state.SET_HR state.SET_SEC state.SET_MIN state.IDLE 
+state.IDLE 0 0 0 0 
+state.SET_MIN 0 0 1 1 
+state.SET_SEC 0 1 0 1 
+state.SET_HR 1 0 0 1 

@@ -1,0 +1,149 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : -9.662
+TNS   : -154.443
+
+Type  : Slow 1200mV 85C Model Setup 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : -5.574
+TNS   : -137.217
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : -4.323
+TNS   : -192.933
+
+Type  : Slow 1200mV 85C Model Setup 'adult'
+Slack : -3.571
+TNS   : -310.157
+
+Type  : Slow 1200mV 85C Model Hold 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : 0.452
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : 0.453
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'adult'
+Slack : 1.878
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -108.577
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'adult'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : -1.487
+TNS   : -90.707
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : -1.487
+TNS   : -49.071
+
+Type  : Slow 1200mV 0C Model Setup 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : -8.867
+TNS   : -140.102
+
+Type  : Slow 1200mV 0C Model Setup 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : -5.218
+TNS   : -125.995
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -3.981
+TNS   : -175.764
+
+Type  : Slow 1200mV 0C Model Setup 'adult'
+Slack : -3.327
+TNS   : -287.173
+
+Type  : Slow 1200mV 0C Model Hold 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : 0.401
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.401
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : 0.403
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'adult'
+Slack : 1.762
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -108.577
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'adult'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : -1.487
+TNS   : -90.707
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : -1.487
+TNS   : -49.071
+
+Type  : Fast 1200mV 0C Model Setup 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : -3.553
+TNS   : -34.129
+
+Type  : Fast 1200mV 0C Model Setup 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : -2.115
+TNS   : -42.614
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -1.248
+TNS   : -43.279
+
+Type  : Fast 1200mV 0C Model Setup 'adult'
+Slack : -0.882
+TNS   : -65.839
+
+Type  : Fast 1200mV 0C Model Hold 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'adult'
+Slack : 0.614
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -79.091
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'adult'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'DS1302_Top_p:DS1302_Top_p_inst|CLK_div:cl|clk_out'
+Slack : -1.000
+TNS   : -61.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller_prueba1:inst|clk_10'
+Slack : -1.000
+TNS   : -33.000
+
+------------------------------------------------------------

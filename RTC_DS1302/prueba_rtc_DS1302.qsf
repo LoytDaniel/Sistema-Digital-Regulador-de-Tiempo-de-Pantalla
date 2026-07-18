@@ -94,7 +94,7 @@ set_location_assignment PIN_23 -to clk
 set_location_assignment PIN_133 -to bitON[3]
 set_location_assignment PIN_135 -to bitON[4]
 set_location_assignment PIN_136 -to bitON[5]
-set_location_assignment PIN_58 -to hr_en
-set_location_assignment PIN_54 -to min_en
-set_location_assignment PIN_52 -to sec_en
+set_location_assignment PIN_80 -to hr_en
+set_location_assignment PIN_83 -to min_en
+set_location_assignment PIN_84 -to sec_en
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

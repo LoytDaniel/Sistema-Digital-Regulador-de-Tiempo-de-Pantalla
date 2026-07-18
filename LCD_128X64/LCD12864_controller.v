@@ -122,11 +122,11 @@ initial begin
     clk_10 <= 1'b0;
     clk_counter <= 'b0;
     // Cargar memorias gráficas desde archivos de texto
-    $readmemh("kids.txt",kids_mem);
-    $readmemh("adult.txt",adult_mem);
-    $readmemh("menu.txt",menu_mem);
-    $readmemh("password.txt",password_mem);
-    $readmemh("setting.txt",setting_mem);
+    $readmemh("KIDS_MODE.txt",kids_mem);
+    $readmemh("ADULT_MODE.txt",adult_mem);
+    $readmemh("MAIN_MENU.txt",menu_mem);
+    $readmemh("PASSWORD.txt",password_mem);
+    $readmemh("SETTINGS.txt",setting_mem);
     pixel_asterisco[0] = 8'h00;
     pixel_asterisco[1] = 8'h14;
     pixel_asterisco[2] = 8'h08;
@@ -148,11 +148,11 @@ initial begin
     config_mem[3] <= DISPLAY_ON;    // Display ON
 end
 
-reg [55:0] left_time_hr_pix_dec, left_time_hr_pix_uni, left_time_min_pix_dec, left_time_min_pix_uni;
-reg [55:0] current_hr_pix_dec, current_hr_pix_uni, current_min_pix_dec, current_min_pix_uni;
-reg [55:0] tiempo_hr_pix_dec, tiempo_hr_pix_uni, tiempo_min_pix_dec, tiempo_min_pix_uni;
-reg [55:0] inicio_hr_pix_dec, inicio_hr_pix_uni, inicio_min_pix_dec, inicio_min_pix_uni;
-reg [55:0] final_hr_pix_dec, final_hr_pix_uni, final_min_pix_dec, final_min_pix_uni;
+wire [55:0] left_time_hr_pix_dec, left_time_hr_pix_uni, left_time_min_pix_dec, left_time_min_pix_uni;
+wire [55:0] current_hr_pix_dec, current_hr_pix_uni, current_min_pix_dec, current_min_pix_uni;
+wire [55:0] tiempo_hr_pix_dec, tiempo_hr_pix_uni, tiempo_min_pix_dec, tiempo_min_pix_uni;
+wire [55:0] inicio_hr_pix_dec, inicio_hr_pix_uni, inicio_min_pix_dec, inicio_min_pix_uni;
+wire [55:0] final_hr_pix_dec, final_hr_pix_uni, final_min_pix_dec, final_min_pix_uni;
 
 screen_builder_pixel screen_builder_inst(
     .current_hr(current_hr), .current_min(current_min), 
@@ -233,19 +233,19 @@ always @(*) begin
 //Cambiar las posiciones dinamicas
     if (kids) begin
         for (j = 0; j < 7; j = j + 1) begin
-            graphic_mem[430+j]=left_time_hr_pixel_dec[j];
-            graphic_mem[437+j]=left_time_hr_pixel_uni[j];
-            graphic_mem[448+j]=left_time_min_pixel_dec[j];
-            graphic_mem[455+j]=left_time_min_pixel_uni[j];
+            graphic_mem[430+j]=left_time_hr_pixel_dec[6-j];
+            graphic_mem[437+j]=left_time_hr_pixel_uni[6-j];
+            graphic_mem[448+j]=left_time_min_pixel_dec[6-j];
+            graphic_mem[455+j]=left_time_min_pixel_uni[6-j];
         end
     end
     else if (password) begin
         if (pass_incorrecta) begin
             for (j = 0; j < 7; j = j + 1) begin  //Cargar los guiones si la contraseña es incorrecta
-            graphic_mem[307+j] = pixel_guion[j];
-            graphic_mem[314+j] = pixel_guion[j];
-            graphic_mem[321+j] = pixel_guion[j];
-            graphic_mem[328+j] = pixel_guion[j];
+            graphic_mem[307+j] = pixel_guion[6-j];
+            graphic_mem[314+j] = pixel_guion[6-j];
+            graphic_mem[321+j] = pixel_guion[6-j];
+            graphic_mem[328+j] = pixel_guion[6-j];
             end
         end else begin
             for (j = 0; j < 128; j = j + 1) begin  //Quitar la linea de contraseña incorrecta
@@ -253,54 +253,54 @@ always @(*) begin
             end
         end 
         for (j = 0; j < 7; j = j + 1) begin  //Cargar los asteriscos o guiones dependiendo del número de dígitos ingresados
-            graphic_mem[307+j] = (num_ingresados >= 1) ? pixel_asterisco[j] : pixel_guion[j];
-            graphic_mem[314+j] = (num_ingresados >= 2) ? pixel_asterisco[j] : pixel_guion[j];
-            graphic_mem[321+j] = (num_ingresados >= 3) ? pixel_asterisco[j] : pixel_guion[j];
-            graphic_mem[328+j] = (num_ingresados >= 4) ? pixel_asterisco[j] : pixel_guion[j];
+            graphic_mem[307+j] = (num_ingresados >= 1) ? pixel_asterisco[6-j] : pixel_guion[6-j];
+            graphic_mem[314+j] = (num_ingresados >= 2) ? pixel_asterisco[6-j] : pixel_guion[6-j];
+            graphic_mem[321+j] = (num_ingresados >= 3) ? pixel_asterisco[6-j] : pixel_guion[6-j];
+            graphic_mem[328+j] = (num_ingresados >= 4) ? pixel_asterisco[6-j] : pixel_guion[6-j];
         end 
     end
     else if (adult) begin
         for (j = 0; j < 7; j = j + 1) begin
-            graphic_mem[430+j]=left_time_hr_pixel_dec[j];
-            graphic_mem[437+j]=left_time_hr_pixel_uni[j];
-            graphic_mem[448+j]=left_time_min_pixel_dec[j];
-            graphic_mem[455+j]=left_time_min_pixel_uni[j];
+            graphic_mem[430+j]=current_hr_pixel_dec[6-j];
+            graphic_mem[437+j]=current_hr_pixel_uni[6-j];
+            graphic_mem[448+j]=current_min_pixel_dec[6-j];
+            graphic_mem[455+j]=current_min_pixel_uni[6-j];
         end
     end
     else if (setting) begin
         for (j = 0; j < 7; j = j + 1) begin
-            graphic_mem[309+j]=tiempo_hr_pixel_dec[j];
-            graphic_mem[316+j]=tiempo_hr_pixel_uni[j];
-            graphic_mem[327+j]=tiempo_min_pixel_dec[j];
-            graphic_mem[334+j]=tiempo_min_pixel_uni[j];
-            graphic_mem[444+j]=inicio_hr_pixel_dec[j];
-            graphic_mem[451+j]=inicio_hr_pixel_uni[j];
-            graphic_mem[462+j]=inicio_min_pixel_dec[j];
-            graphic_mem[469+j]=inicio_min_pixel_uni[j];
-            graphic_mem[558+j]=final_hr_pixel_dec[j];
-            graphic_mem[565+j]=final_hr_pixel_uni[j];
-            graphic_mem[576+j]=final_min_pixel_dec[j];
-            graphic_mem[583+j]=final_min_pixel_uni[j];
+            graphic_mem[309+j]=tiempo_hr_pixel_dec[6-j];
+            graphic_mem[316+j]=tiempo_hr_pixel_uni[6-j];
+            graphic_mem[327+j]=tiempo_min_pixel_dec[6-j];
+            graphic_mem[334+j]=tiempo_min_pixel_uni[6-j];
+            graphic_mem[444+j]=inicio_hr_pixel_dec[6-j];
+            graphic_mem[451+j]=inicio_hr_pixel_uni[6-j];
+            graphic_mem[462+j]=inicio_min_pixel_dec[6-j];
+            graphic_mem[469+j]=inicio_min_pixel_uni[6-j];
+            graphic_mem[558+j]=final_hr_pixel_dec[6-j];
+            graphic_mem[565+j]=final_hr_pixel_uni[6-j];
+            graphic_mem[576+j]=final_min_pixel_dec[6-j];
+            graphic_mem[583+j]=final_min_pixel_uni[6-j];
         end
         if(!cursor_visible) begin
             for (j = 0; j < 7; j = j + 1) begin
                 if(posicion_fila == 2'b00) begin //Fila 1 (tiempo)
-                    if(posicion_columna == 2'b00) graphic_mem[309+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b01) graphic_mem[316+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b10) graphic_mem[327+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b11) graphic_mem[334+j]=pixel_guion[j];
+                    if(posicion_columna == 2'b00) graphic_mem[309+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b01) graphic_mem[316+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b10) graphic_mem[327+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b11) graphic_mem[334+j]=pixel_guion[6-j];
                 end
                 else if(posicion_fila == 2'b01) begin //Fila 2 (inicio)
-                    if(posicion_columna == 2'b00) graphic_mem[444+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b01) graphic_mem[451+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b10) graphic_mem[462+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b11) graphic_mem[469+j]=pixel_guion[j];
+                    if(posicion_columna == 2'b00) graphic_mem[444+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b01) graphic_mem[451+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b10) graphic_mem[462+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b11) graphic_mem[469+j]=pixel_guion[6-j];
                 end
                 else if(posicion_fila == 2'b10) begin //Fila 3 (final)
-                    if(posicion_columna == 2'b00) graphic_mem[558+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b01) graphic_mem[565+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b10) graphic_mem[576+j]=pixel_guion[j];
-                    else if(posicion_columna == 2'b11) graphic_mem[583+j]=pixel_guion[j];
+                    if(posicion_columna == 2'b00) graphic_mem[558+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b01) graphic_mem[565+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b10) graphic_mem[576+j]=pixel_guion[6-j];
+                    else if(posicion_columna == 2'b11) graphic_mem[583+j]=pixel_guion[6-j];
                 end
             end
         end

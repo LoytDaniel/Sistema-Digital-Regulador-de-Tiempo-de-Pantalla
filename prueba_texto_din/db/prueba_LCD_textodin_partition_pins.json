@@ -1,0 +1,109 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "CE",
+					"strict" : false
+				},
+				{
+					"name" : "SCLK",
+					"strict" : false
+				},
+				{
+					"name" : "di",
+					"strict" : false
+				},
+				{
+					"name" : "enable",
+					"strict" : false
+				},
+				{
+					"name" : "cs1",
+					"strict" : false
+				},
+				{
+					"name" : "cs2",
+					"strict" : false
+				},
+				{
+					"name" : "data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "IO",
+					"strict" : false
+				},
+				{
+					"name" : "rstn",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "adult",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[2]",
+					"strict" : false
+				},
+				{
+					"name" : "set_btn",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
