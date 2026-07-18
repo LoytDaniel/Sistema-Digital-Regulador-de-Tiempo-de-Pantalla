@@ -1,6 +1,6 @@
 module screen_builder_pixel (
     input [7:0] left_time_H, left_time_M,
-    input [7:0] current_hr, current_time_min,
+    input [7:0] current_hr, current_min,
     input [7:0] tiempo_hr, tiempo_min,
     input [7:0] inicio_hr, inicio_min,
     input [7:0] final_hr, final_min,

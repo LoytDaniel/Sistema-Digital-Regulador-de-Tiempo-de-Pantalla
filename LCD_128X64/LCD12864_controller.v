@@ -11,7 +11,8 @@ module LCD12864_controller #(
     parameter NUM_PAGES = 8,
     parameter DATA_BITS = 8,
     parameter COUNT_MAX = 500,
-    parameter NUM_DATA_ALL = 1024 // Datos gráficos: 2 chips × 8 páginas × 64 columnas = 1024 bytes
+    parameter NUM_DATA_ALL = 1024, // Datos gráficos: 2 chips × 8 páginas × 64 columnas = 1024 bytes
+    parameter CLOCK_FPGA = 50_000_000 // Frecuencia del reloj de la FPGA (Hz)
 )(
     input clk, reset,
     output reg di, // Data/Instruction (0=cmd, 1=dato)
@@ -19,7 +20,7 @@ module LCD12864_controller #(
     output enable, // Pulso de habilitación (= clk_16ms)
     output reg cs1, // Chip Select lado izquierdo
     output reg cs2, // Chip Select lado derecho
-    output reg [DATA_BITS-1:0] data// Bus de datos 8 bits
+    output reg [DATA_BITS-1:0] data,// Bus de datos 8 bits
     //Variables para el cambio de pantalla
     input kids, password, menu, adult, setting,
     input [7:0] left_time_H, left_time_M,
@@ -48,7 +49,7 @@ reg [24:0] blink_cnt;
 reg cursor_visible;
 
 always @(posedge clk) begin
-    if (!rstn) begin
+    if (!reset) begin
         blink_cnt <= 0;
         cursor_visible <= 0;
     end else begin
@@ -126,9 +127,20 @@ initial begin
     $readmemh("menu.txt",menu_mem);
     $readmemh("password.txt",password_mem);
     $readmemh("setting.txt",setting_mem);
-    pixel_asterisco = {8'h00, 8'h14, 8'h08, 8'h3E, 8'h08, 8'h14, 8'h00};
-    pixel_guion = {8'h00, 8'h40, 8'h40, 8'h40, 8'h40, 8'h40, 8'h00};
-
+    pixel_asterisco[0] = 8'h00;
+    pixel_asterisco[1] = 8'h14;
+    pixel_asterisco[2] = 8'h08;
+    pixel_asterisco[3] = 8'h3E;
+    pixel_asterisco[4] = 8'h08;
+    pixel_asterisco[5] = 8'h14;
+    pixel_asterisco[6] = 8'h00;
+    pixel_guion[0] = 8'h00;
+    pixel_guion[1] = 8'h40;
+    pixel_guion[2] = 8'h40;
+    pixel_guion[3] = 8'h40;
+    pixel_guion[4] = 8'h40;
+    pixel_guion[5] = 8'h40;
+    pixel_guion[6] = 8'h00;
     // Secuencia de inicialización KS0108 (igual para CS1 y CS2)
     config_mem[0] <= SET_START_L0;  // Línea de inicio = 0
     config_mem[1] <= SET_PAGE_0;    // Página 0 (X address)
@@ -273,7 +285,7 @@ always @(*) begin
         if(!cursor_visible) begin
             for (j = 0; j < 7; j = j + 1) begin
                 if(posicion_fila == 2'b00) begin //Fila 1 (tiempo)
-                    if(posicion_columna == 2'b00) graphic_mem[309+j]=pixel_guion[j];;
+                    if(posicion_columna == 2'b00) graphic_mem[309+j]=pixel_guion[j];
                     else if(posicion_columna == 2'b01) graphic_mem[316+j]=pixel_guion[j];
                     else if(posicion_columna == 2'b10) graphic_mem[327+j]=pixel_guion[j];
                     else if(posicion_columna == 2'b11) graphic_mem[334+j]=pixel_guion[j];
@@ -297,7 +309,7 @@ end
 
 // Registro de estado (síncrono con clk_10)
 always @(posedge clk_10) begin
-    if (reset == 1'b0)
+    if (!reset)
         fsm_state <= IDLE;
     else
         fsm_state <= next_state;
@@ -345,7 +357,7 @@ end
 
 // Lógica de salida y actualización de contadores (síncrono con clk_10)
 always @(posedge clk_10) begin
-    if (reset == 1'b0) begin
+    if (!reset) begin
         command_counter <= 'b0;
         data_counter <= 'b0;
         page_counter <= 'b0;
@@ -366,6 +378,7 @@ always @(posedge clk_10) begin
             end
 
             //CHIP 1
+            CONFIG_CS1: begin
                 cs1 <= 1'b1;
                 cs2 <= 1'b0;
                 di <= 1'b0;  // Instrucción
@@ -394,10 +407,12 @@ always @(posedge clk_10) begin
             end
 
             // CHIP 2
+            CONFIG_CS2: begin
                 cs1 <= 1'b0;
                 cs2 <= 1'b1;
                 di <= 1'b0;  // Instrucción
                 data <= config_mem[command_counter];
+                command_counter <= command_counter + 1;
             end
 
             SET_PG_CS2: begin
