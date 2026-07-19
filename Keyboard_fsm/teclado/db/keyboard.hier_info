@@ -1,0 +1,159 @@
+|top
+clk => clk.IN1
+reset => nreset.IN1
+column[0] => ncolumn[0].IN1
+column[1] => ncolumn[1].IN1
+column[2] => ncolumn[2].IN1
+column[3] => ncolumn[3].IN1
+bitON <= <GND>
+row[0] <= matriz_4x4:m1.row
+row[1] <= matriz_4x4:m1.row
+row[2] <= matriz_4x4:m1.row
+row[3] <= matriz_4x4:m1.row
+seg[0] <= BCD_to_7seg_decoder:s1.deg
+seg[1] <= BCD_to_7seg_decoder:s1.deg
+seg[2] <= BCD_to_7seg_decoder:s1.deg
+seg[3] <= BCD_to_7seg_decoder:s1.deg
+seg[4] <= BCD_to_7seg_decoder:s1.deg
+seg[5] <= BCD_to_7seg_decoder:s1.deg
+seg[6] <= BCD_to_7seg_decoder:s1.deg
+
+
+|top|matriz_4x4:m1
+column[0] => Decoder1.IN3
+column[0] => Mux1.IN19
+column[0] => Mux0.IN19
+column[0] => Mux2.IN19
+column[1] => Decoder1.IN2
+column[1] => Mux1.IN18
+column[1] => Mux0.IN18
+column[1] => Mux2.IN18
+column[2] => Decoder1.IN1
+column[2] => Mux1.IN17
+column[2] => Mux0.IN17
+column[2] => Mux2.IN17
+column[3] => Decoder1.IN0
+column[3] => Mux1.IN16
+column[3] => Mux0.IN16
+column[3] => Mux2.IN16
+clk => clk.IN1
+reset => reset.IN2
+push_button <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+row[0] <= row[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+row[1] <= row[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+row[2] <= row[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+row[3] <= row[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+key_value[0] <= key_value[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+key_value[1] <= key_value[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
+key_value[2] <= key_value[2]$latch.DB_MAX_OUTPUT_PORT_TYPE
+key_value[3] <= key_value[3]$latch.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|top|matriz_4x4:m1|clock:cl
+clk => count~reg0.CLK
+clk => cuenta[0].CLK
+clk => cuenta[1].CLK
+clk => cuenta[2].CLK
+clk => cuenta[3].CLK
+clk => cuenta[4].CLK
+clk => cuenta[5].CLK
+clk => cuenta[6].CLK
+clk => cuenta[7].CLK
+clk => cuenta[8].CLK
+clk => cuenta[9].CLK
+clk => cuenta[10].CLK
+clk => cuenta[11].CLK
+clk => cuenta[12].CLK
+clk => cuenta[13].CLK
+clk => cuenta[14].CLK
+clk => cuenta[15].CLK
+clk => cuenta[16].CLK
+clk => cuenta[17].CLK
+clk => cuenta[18].CLK
+clk => cuenta[19].CLK
+clk => cuenta[20].CLK
+clk => cuenta[21].CLK
+clk => cuenta[22].CLK
+clk => cuenta[23].CLK
+clk => cuenta[24].CLK
+clk => cuenta[25].CLK
+clk => cuenta[26].CLK
+clk => cuenta[27].CLK
+clk => cuenta[28].CLK
+clk => cuenta[29].CLK
+clk => cuenta[30].CLK
+clk => cuenta[31].CLK
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => cuenta.OUTPUTSELECT
+reset => count.OUTPUTSELECT
+count <= count~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|top|matriz_4x4:m1|counter:c1
+clk => count[0]~reg0.CLK
+clk => count[1]~reg0.CLK
+reset => count.OUTPUTSELECT
+reset => count.OUTPUTSELECT
+count[0] <= count[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[1] <= count[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|top|encoder_matriz:e1
+key_value[0] => Decoder0.IN3
+key_value[1] => Decoder0.IN2
+key_value[2] => Decoder0.IN1
+key_value[3] => Decoder0.IN0
+push_button => encoded_value.OUTPUTSELECT
+push_button => encoded_value.OUTPUTSELECT
+push_button => encoded_value.OUTPUTSELECT
+push_button => encoded_value.OUTPUTSELECT
+encoded_value[0] <= encoded_value.DB_MAX_OUTPUT_PORT_TYPE
+encoded_value[1] <= encoded_value.DB_MAX_OUTPUT_PORT_TYPE
+encoded_value[2] <= encoded_value.DB_MAX_OUTPUT_PORT_TYPE
+encoded_value[3] <= encoded_value.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|top|BCD_to_7seg_decoder:s1
+bcd[0] => Decoder0.IN3
+bcd[1] => Decoder0.IN2
+bcd[2] => Decoder0.IN1
+bcd[3] => Decoder0.IN0
+deg[0] <= WideOr6.DB_MAX_OUTPUT_PORT_TYPE
+deg[1] <= WideOr5.DB_MAX_OUTPUT_PORT_TYPE
+deg[2] <= WideOr4.DB_MAX_OUTPUT_PORT_TYPE
+deg[3] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+deg[4] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+deg[5] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+deg[6] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+
+

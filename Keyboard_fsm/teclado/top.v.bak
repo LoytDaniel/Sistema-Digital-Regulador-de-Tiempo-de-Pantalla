@@ -1,0 +1,31 @@
+module top (
+    input clk, reset,
+    input [3:0] column,
+    output push_button,
+    output reg [3:0] row,
+    output reg [6:0] seg
+);
+    wire [3:0] key_value, encoded_value;
+
+    matriz_4x4 m1 (
+        .column(column),
+        .clk(clk),
+        .reset(reset),
+        .push_button(push_button),
+        .row(row),
+        .key_value(key_value)
+    );
+
+    encoder_matriz e1 (
+        .key_value(key_value),
+        .push_button(push_button),
+        .encoded_value(encoded_value)
+    );
+    
+    BCD_to_7segment s1 (
+        .bcd(encoded_value),
+        .seg(seg)
+    );
+    
+
+endmodule

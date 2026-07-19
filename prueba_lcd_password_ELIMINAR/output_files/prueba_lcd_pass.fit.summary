@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun Jul 19 12:01:53 2026
+Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+Revision Name : prueba_lcd_pass
+Top-level Entity Name : prueba_lcd_pass
+Family : Cyclone IV E
+Device : EP4CE10E22C8
+Timing Models : Final
+Total logic elements : 611 / 10,320 ( 6 % )
+    Total combinational functions : 585 / 10,320 ( 6 % )
+    Dedicated logic registers : 144 / 10,320 ( 1 % )
+Total registers : 144
+Total pins : 36 / 92 ( 39 % )
+Total virtual pins : 0
+Total memory bits : 0 / 423,936 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

@@ -1,0 +1,17 @@
+
+State Machine - |prueba_lcd_pass|LCD12864_controller_p2:lcd|fsm_state
+Name fsm_state.NEXT_PG fsm_state.WR_DATA_CS2 fsm_state.SET_PG_CS2 fsm_state.CONFIG_CS2 fsm_state.WR_DATA_CS1 fsm_state.SET_PG_CS1 fsm_state.CONFIG_CS1 fsm_state.IDLE 
+fsm_state.IDLE 0 0 0 0 0 0 0 0 
+fsm_state.CONFIG_CS1 0 0 0 0 0 0 1 1 
+fsm_state.SET_PG_CS1 0 0 0 0 0 1 0 1 
+fsm_state.WR_DATA_CS1 0 0 0 0 1 0 0 1 
+fsm_state.CONFIG_CS2 0 0 0 1 0 0 0 1 
+fsm_state.SET_PG_CS2 0 0 1 0 0 0 0 1 
+fsm_state.WR_DATA_CS2 0 1 0 0 0 0 0 1 
+fsm_state.NEXT_PG 1 0 0 0 0 0 0 1 
+
+State Machine - |prueba_lcd_pass|Keyboard_top:keyboard|FSM_teclado:fsm|state
+Name state.IDLE state.DEBOUNCE state.SCAN 
+state.IDLE 0 0 0 
+state.SCAN 1 0 1 
+state.DEBOUNCE 1 1 0 

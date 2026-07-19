@@ -10,7 +10,7 @@ module decodificador (
     
 always @(posedge clk) begin
     if (reset) begin
-        salida <= 4'b0000; // Reinicia la salida a 0
+        salida <= 4'hf; // Reinicia la salida a 0
         decoder <= 0; // Reinicia la señal de decodificación
     end else if (decodificar) begin
         decoder <= 1; // Activa la señal de decodificación
@@ -37,11 +37,11 @@ always @(posedge clk) begin
             {2'b11, 4'b1000}: salida <= 4'hF;
 
              // aqui poner las otras dos teclas para aceptar y cancelar
-            default: salida <= salida; // Ninguna tecla presionada o combinación no válida
+            default: salida <= 4'hF; // Ninguna tecla presionada o combinación no válida
         endcase
     end else begin
 
-        salida <= salida; // Mantiene el valor actual si no se está decodificando
+        salida <= 4'hF; // Mantiene el valor actual si no se está decodificando
         decoder <= 0; // Desactiva la señal de decodificación
 
     end

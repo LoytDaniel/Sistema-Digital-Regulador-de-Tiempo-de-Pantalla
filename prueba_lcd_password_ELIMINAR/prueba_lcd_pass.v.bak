@@ -1,0 +1,63 @@
+module prueba_lcd_pass (
+    input clk, reset,
+    input [3:0] col,
+    input password, //Enable de la FSM para este modulo
+    output [3:0] row,
+    output di, // Data/Instruction (0=cmd, 1=dato)
+    output rw, // Read/Write (siempre 0=write)
+    output enable, // Pulso de habilitación (= clk_16ms)
+    output cs1, // Chip Select lado izquierdo
+    output cs2, // Chip Select lado derecho
+    output [DATA_BITS-1:0] data,// Bus de datos 8 bits
+    //Variables para el cambio de pantalla
+);
+
+wire nreset;
+wire [3:0] key_out, key_in;
+wire push_button, Aceptar, Borrar, Salir, is_digit, correct_password, incorrect_password;
+wire [2:0] puntero_digitos;
+assign nreset = ~reset;
+
+Keyboard_top keyboard (
+    .clk(clk),
+    .reset(reset),
+    .col(col),
+    .row(row),
+    .key_out(key_out), 
+    .key_in(key_in),
+    .push_button(push_button),
+    .Aceptar(Aceptar),
+    .Borrar(Borrar),
+    .Salir(Salir),
+    .is_digit(is_digit)
+);
+
+password_menu pass (
+    .clk(clk),
+    .rst(nreset),
+    .push_button(push_button),
+    .key_out(key_in),
+    .Aceptar(Aceptar),
+    .Borrar(Borrar),
+    .is_digit(is_digit),
+    .password(password),
+    .correct_password(correct_password),
+    .incorrect_password(incorrect_password),
+    .puntero_digitos(puntero_digitos)
+);
+
+LCD12864_controller_p2 lcd (
+    .clk(clk),
+    .rst(reset),
+    .di(di),
+    .rw(rw),
+    .enable(enable),
+    .cs1(cs1),
+    .cs2(cs2),
+    .data(data),
+    .password(password),
+    .num_ingresados(puntero_digitos),
+    .pass_incorrecta(incorrect_password)
+);
+    
+endmodule

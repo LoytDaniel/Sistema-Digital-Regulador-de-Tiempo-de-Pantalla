@@ -1,0 +1,149 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'LCD12864_controller_p2:lcd|clk_10'
+Slack : -5.172
+TNS   : -117.959
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : -4.365
+TNS   : -135.525
+
+Type  : Slow 1200mV 85C Model Setup 'password'
+Slack : -2.931
+TNS   : -23.532
+
+Type  : Slow 1200mV 85C Model Setup 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : -2.853
+TNS   : -109.773
+
+Type  : Slow 1200mV 85C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : 0.452
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'LCD12864_controller_p2:lcd|clk_10'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.465
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'password'
+Slack : 1.446
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -66.941
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'password'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : -1.487
+TNS   : -101.116
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'LCD12864_controller_p2:lcd|clk_10'
+Slack : -1.487
+TNS   : -49.071
+
+Type  : Slow 1200mV 0C Model Setup 'LCD12864_controller_p2:lcd|clk_10'
+Slack : -4.866
+TNS   : -108.512
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -4.097
+TNS   : -122.701
+
+Type  : Slow 1200mV 0C Model Setup 'password'
+Slack : -2.731
+TNS   : -21.655
+
+Type  : Slow 1200mV 0C Model Setup 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : -2.621
+TNS   : -97.956
+
+Type  : Slow 1200mV 0C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : 0.400
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'LCD12864_controller_p2:lcd|clk_10'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.416
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'password'
+Slack : 1.406
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -66.941
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'password'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : -1.487
+TNS   : -101.116
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller_p2:lcd|clk_10'
+Slack : -1.487
+TNS   : -49.071
+
+Type  : Fast 1200mV 0C Model Setup 'LCD12864_controller_p2:lcd|clk_10'
+Slack : -1.876
+TNS   : -33.307
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -1.393
+TNS   : -33.853
+
+Type  : Fast 1200mV 0C Model Setup 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : -1.079
+TNS   : -25.308
+
+Type  : Fast 1200mV 0C Model Setup 'password'
+Slack : -0.590
+TNS   : -4.045
+
+Type  : Fast 1200mV 0C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'LCD12864_controller_p2:lcd|clk_10'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.194
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'password'
+Slack : 0.476
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -48.841
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'password'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Keyboard_top:keyboard|clock:clk_div|count'
+Slack : -1.000
+TNS   : -68.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller_p2:lcd|clk_10'
+Slack : -1.000
+TNS   : -33.000
+
+------------------------------------------------------------
