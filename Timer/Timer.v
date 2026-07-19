@@ -61,8 +61,6 @@ end
 wire start_edge = start_cleaned & ~start_cleaned_d;
 wire pause_edge = pause_cleaned & ~pause_cleaned_d;
 
-
-
 always @(posedge clk_10ms) begin
 
     if (reset) begin //usarlo cuando paso un dia y que vuelva todo a 0
@@ -73,17 +71,21 @@ always @(posedge clk_10ms) begin
         subtract_enable <= 1'b0;
         timer_minute <= 11'd0;
         left_time_saved <= 11'd0;
-    end else if (start_edge && kids && ~subtract_enable) begin
+
+    
+    end else if (kids && temp_enable) begin
+
+        if (start_edge && ~subtract_enable) begin
         start_time_minute  <= minutes(current_time_H, current_time_M);
         limit_time_minute  <= minutes(limit_time_H, limit_time_M);
         subtract_enable    <= 1'b1;
+        end
 
-    end else if (pause_edge && kids) begin
-        subtract_enable  <= 1'b0;
-        left_time_saved  <= timer_minute;
-        off_enable       <= 1'b1;
-    end else if (kids || temp_enable) begin
-
+        if (pause_edge) begin
+            subtract_enable  <= 1'b0;
+            left_time_saved  <= timer_minute;
+            off_enable       <= 1'b1;
+        end
         if (subtract_enable) begin
 
             current_time_minute=minutes(current_time_H,current_time_M);
