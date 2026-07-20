@@ -61,9 +61,15 @@ end
 wire start_edge = start_cleaned & ~start_cleaned_d;
 wire pause_edge = pause_cleaned & ~pause_cleaned_d;
 
+
+//Activar la señal de reinicio de dia
+wire reset_day;
+assign reset_day = ((current_time_H == 8'd0) && (current_time_M == 8'd0)) ? 1'b1 : 1'b0;
+
+
 always @(posedge clk_10ms) begin
 
-    if (reset) begin //usarlo cuando paso un dia y que vuelva todo a 0
+    if (reset_day || reset) begin //usarlo cuando paso un dia y que vuelva todo a 0
 
         left_time[0] <= 8'd0;
         left_time[1] <= 8'd0;
@@ -76,9 +82,9 @@ always @(posedge clk_10ms) begin
     end else if (kids && temp_enable) begin
 
         if (start_edge && ~subtract_enable) begin
-        start_time_minute  <= minutes(current_time_H, current_time_M);
-        limit_time_minute  <= minutes(limit_time_H, limit_time_M);
-        subtract_enable    <= 1'b1;
+        start_time_minute <= minutes(current_time_H, current_time_M);
+        limit_time_minute <= minutes(limit_time_H, limit_time_M);
+        subtract_enable <= 1'b1;
         end
 
         if (pause_edge) begin

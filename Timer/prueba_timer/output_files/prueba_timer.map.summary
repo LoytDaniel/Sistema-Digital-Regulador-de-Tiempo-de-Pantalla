@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon Jul 20 01:13:28 2026
+Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+Revision Name : prueba_timer
+Top-level Entity Name : prueba_timer
+Family : Cyclone IV E
+Total logic elements : 1,565
+    Total combinational functions : 1,557
+    Dedicated logic registers : 234
+Total registers : 234
+Total pins : 31
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
