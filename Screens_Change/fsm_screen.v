@@ -1,8 +1,7 @@
-module fsm_pantalla (
-    input main_menu,
+module fsm_screen (
     input clk,
     input reset,
-    input exit, //pooner exits independientes?
+    input exit,
     input correct_password,
     input [1:0] sel,
 
@@ -34,7 +33,7 @@ always @(*) begin
     next_state = state; 
     case (state)
         KIDS: begin
-            if (main_menu) state=PASSWORD;
+            if (exit) state=PASSWORD;  //main menu usa la misma tecla que exit, se toma como una sola señal
             else state=KIDS;
         end
         PASSWORD: begin
