@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon Jul 20 02:52:57 2026
+Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+Revision Name : prueba_screen
+Top-level Entity Name : screens_change_p
+Family : Cyclone IV E
+Total logic elements : 1,225
+    Total combinational functions : 1,225
+    Dedicated logic registers : 48
+Total registers : 48
+Total pins : 21
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

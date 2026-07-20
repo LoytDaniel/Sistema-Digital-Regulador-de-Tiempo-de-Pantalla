@@ -30,32 +30,32 @@ always @(posedge clk or posedge reset) begin
 end
 
 always @(*) begin
-    next_state = state; 
+ next_state = state;
     case (state)
         KIDS: begin
-            if (exit) state=PASSWORD;  //main menu usa la misma tecla que exit, se toma como una sola señal
-            else state=KIDS;
+            if (exit) next_state=PASSWORD;  //main menu usa la misma tecla que exit, se toma como una sola señal
+            else next_state=KIDS;
         end
         PASSWORD: begin
-            if (exit) state=KIDS;
-            else if (correct_password) state=MENU;
-            else state=PASSWORD;
+            if (exit) next_state=KIDS;
+            else if (correct_password) next_state=MENU;
+            else next_state=PASSWORD;
         end
         MENU: begin
-            if (exit) state=KIDS;
-            else if (sel==2'b01) state=ADULT;
-            else if (sel==2'b10) state=SETTINGS;
-            else state=MENU;
+            if (exit) next_state=KIDS;
+            else if (sel==2'b01) next_state=ADULT;
+            else if (sel==2'b10) next_state=SETTINGS;
+            else next_state=MENU;
         end
         ADULT: begin
-            if (exit) state=MENU;
-            else state=ADULT;
+            if (exit) next_state=MENU;
+            else next_state=ADULT;
         end
         SETTINGS: begin
-            if (exit) state=MENU;
-            else state=SETTINGS;
+            if (exit) next_state=MENU;
+            else next_state=SETTINGS;
         end
-
+	
     endcase
 end
 

@@ -1,20 +1,29 @@
 module screens_change_p (
     input reset, clk,
     input exit, correct_password,
-    input [1:0] sel,
-
+    input [3:0] key,
+    output di, // Data/Instruction (0=cmd, 1=dato)
+    output rw, // Read/Write (siempre 0=write)
+    output enable, // Pulso de habilitación (= clk_16ms)
+    output cs1, // Chip Select lado izquierdo
+    output cs2, // Chip Select lado derecho
+    output [7:0] data// Bus de datos 8 bits
 );
 
 wire kids, password, menu, adult, setting;
+wire [1:0] options;
 
-
+wire nreset, nexit, ncorrect_password;
+assign nreset = ~reset;
+assign nexit = ~exit;
+assign ncorrect_password = ~correct_password;
 
 fsm_screen FS( 
     .clk(clk),
-    .reset(reset),
-    .exit(exit),
-    .correct_password(correct_password),
-    .sel(sel),
+    .reset(nreset),
+    .exit(nexit),
+    .correct_password(ncorrect_password),
+    .sel(options),
 
     .kids(kids),
     .password(password),
@@ -23,9 +32,15 @@ fsm_screen FS(
     .setting(setting)
 );
 
+select_menu sel(
+    .menu(menu),
+    .key_value(key),
+    .options(options)
+);
+
 LCD12864_controller_p4 inst(
     .clk(clk),
-    .reset(rstn),
+    .reset(reset),
     .di(di), // Data/Instruction (0=cmd, 1=dato)
     .rw(rw), // Read/Write (siempre 0=write)
     .enable(enable), // Pulso de habilitación (= clk_16ms)
@@ -38,9 +53,6 @@ LCD12864_controller_p4 inst(
     .menu(menu), 
     .adult(adult), 
     .setting(setting)
-);
-
-
 );
     
 endmodule

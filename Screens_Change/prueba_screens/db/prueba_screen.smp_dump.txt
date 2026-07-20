@@ -1,0 +1,19 @@
+
+State Machine - |screens_change_p|LCD12864_controller_p4:inst|fsm_state
+Name fsm_state.NEXT_PG fsm_state.WR_DATA_CS2 fsm_state.SET_PG_CS2 fsm_state.CONFIG_CS2 fsm_state.WR_DATA_CS1 fsm_state.SET_PG_CS1 fsm_state.CONFIG_CS1 fsm_state.IDLE 
+fsm_state.IDLE 0 0 0 0 0 0 0 0 
+fsm_state.CONFIG_CS1 0 0 0 0 0 0 1 1 
+fsm_state.SET_PG_CS1 0 0 0 0 0 1 0 1 
+fsm_state.WR_DATA_CS1 0 0 0 0 1 0 0 1 
+fsm_state.CONFIG_CS2 0 0 0 1 0 0 0 1 
+fsm_state.SET_PG_CS2 0 0 1 0 0 0 0 1 
+fsm_state.WR_DATA_CS2 0 1 0 0 0 0 0 1 
+fsm_state.NEXT_PG 1 0 0 0 0 0 0 1 
+
+State Machine - |screens_change_p|fsm_screen:FS|state
+Name state.ADULT state.MENU state.PASSWORD state.KIDS state.SETTINGS 
+state.KIDS 0 0 0 0 0 
+state.PASSWORD 0 0 1 1 0 
+state.MENU 0 1 0 1 0 
+state.ADULT 1 0 0 1 0 
+state.SETTINGS 0 0 0 1 1 

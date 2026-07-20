@@ -1,0 +1,89 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'LCD12864_controller_p4:inst|clk_10'
+Slack : -8.056
+TNS   : -179.333
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : -3.576
+TNS   : -25.569
+
+Type  : Slow 1200mV 85C Model Hold 'LCD12864_controller_p4:inst|clk_10'
+Slack : 0.433
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.453
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -25.305
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'LCD12864_controller_p4:inst|clk_10'
+Slack : -1.487
+TNS   : -49.071
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'fsm_screen:FS|state.MENU'
+Slack : 0.426
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'LCD12864_controller_p4:inst|clk_10'
+Slack : -7.481
+TNS   : -165.727
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -3.266
+TNS   : -22.148
+
+Type  : Slow 1200mV 0C Model Hold 'LCD12864_controller_p4:inst|clk_10'
+Slack : 0.382
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -25.305
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller_p4:inst|clk_10'
+Slack : -1.487
+TNS   : -49.071
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'fsm_screen:FS|state.MENU'
+Slack : 0.305
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'LCD12864_controller_p4:inst|clk_10'
+Slack : -2.959
+TNS   : -60.719
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -1.339
+TNS   : -5.437
+
+Type  : Fast 1200mV 0C Model Hold 'LCD12864_controller_p4:inst|clk_10'
+Slack : 0.178
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -18.960
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller_p4:inst|clk_10'
+Slack : -1.000
+TNS   : -33.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'fsm_screen:FS|state.MENU'
+Slack : 0.363
+TNS   : 0.000
+
+------------------------------------------------------------

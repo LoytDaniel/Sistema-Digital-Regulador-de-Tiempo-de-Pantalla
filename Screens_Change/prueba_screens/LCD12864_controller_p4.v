@@ -113,11 +113,11 @@ initial begin
     clk_10 <= 1'b0;
     clk_counter <= 'b0;
     // Cargar memorias gráficas desde archivos de texto
-    $readmemh("KIDS_MODE.txt",kids_mem);
-    $readmemh("ADULT_MODE.txt",adult_mem);
-    $readmemh("MAIN_MENU.txt",menu_mem);
-    $readmemh("PASSWORD.txt",password_mem);
-    $readmemh("SETTINGS.txt",setting_mem);
+    $readmemh("../Screens/KIDS_MODE.txt",kids_mem);
+    $readmemh("../Screens/ADULT_MODE.txt",adult_mem);
+    $readmemh("../Screens/MAIN_MENU.txt",menu_mem);
+    $readmemh("../Screens/PASSWORD.txt",password_mem);
+    $readmemh("../Screens/SETTINGS.txt",setting_mem);
     pixel_asterisco[0] = 8'h00;
     pixel_asterisco[1] = 8'h14;
     pixel_asterisco[2] = 8'h08;
