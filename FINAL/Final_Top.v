@@ -14,18 +14,18 @@ module Final_Top (
     output cs2, // Chip Select lado derecho
     output [7:0] data,// Bus de datos 8 bits
     output [3:0] row,
-    output off, temp
+    output off, temp,dd
 );
 
 //lógica invertida
 wire nreset, noff;
 assign nreset=~reset;
-assign nstart=~start;
-assign npause=~pause;
-assign temp=~temp_enable;
+assign nstart=start;
+assign npause=pause;
+assign temp=~pause;
 
 //Variables internas
-wire incorrect_password, correct_password, kids, password, menu, adult, setting;
+wire incorrect_password, correct_password, kids, password, menu, adult, setting, timer_enable;
 wire [1:0] options, posicion_fila, posicion_columna;
 wire [3:0] key_out;
 wire [7:0] hr_out, min_out, sec_out;
@@ -109,6 +109,7 @@ LCD12864_controller inst(
     .menu(menu), 
     .adult(adult), 
     .setting(setting),
+    .timer_enable(timer_enable),
     .left_time_H(left_time_BCD[1]), 
     .left_time_M(left_time_BCD[0]),
     .current_hr(hr_out), 
@@ -133,7 +134,6 @@ config_logicaFull confFull (
     .setting(setting),
     .key_out(key_out),
     .push_button(push_button),
-    .exit(),
     .tiempo_hr(tiempo_hr),
     .tiempo_min(tiempo_min),
     .inicio_hr(inicio_hr),
@@ -187,13 +187,13 @@ Timer pt(
     .limit_time_M(tiempo_min), 
     .left_time_BCD_H(left_time_BCD[1]),
     .left_time_BCD_M(left_time_BCD[0]),
-    .off_enable(time_finish)
+    .off_enable(time_finish),
+    .timer_enable(timer_enable)
 );
 
 //Verificación cumplimiento franja horaria
 franja_horaria fh(
     .reset(nreset),
-    .kids(kids),
     .inicio_hr(inicio_hr), 
     .inicio_min(inicio_min),
     .final_hr(final_hr), 
@@ -210,6 +210,6 @@ relee_controller rl(
     .off_enable(noff)
 );
 
-assign off = ~noff;
+assign off = noff;
 
 endmodule

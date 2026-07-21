@@ -1,5 +1,5 @@
 Timing Analyzer report for prueba_rtc_DS1302
-Mon Jul 20 18:36:53 2026
+Tue Jul 21 00:55:18 2026
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -105,14 +105,13 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.05        ;
+; Average used               ; 1.04        ;
 ; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.3%      ;
-;     Processor 3            ;   1.4%      ;
-;     Processor 4            ;   1.4%      ;
+;     Processor 2            ;   1.7%      ;
+;     Processors 3-4         ;   1.4%      ;
 +----------------------------+-------------+
 
 
@@ -551,9 +550,9 @@ No paths to report.
 ; 0.675 ; DS1302_controller:Controller|state.WR_SINGLE_PREP ; DS1302_controller:Controller|state.WR_SINGLE      ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 0.968      ;
 ; 0.676 ; DS1302_controller:Controller|state.CNT_RST        ; DS1302_controller:Controller|state.WR_SINGLE_PREP ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 0.969      ;
 ; 0.724 ; DS1302_controller:Controller|state.TERMINATE      ; DS1302_controller:Controller|CH_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.016      ;
+; 0.726 ; DS1302_controller:Controller|state.TERMINATE      ; DS1302_controller:Controller|WP_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.018      ;
 ; 0.726 ; read_request:rd|sec_counter[1]                    ; read_request:rd|sec_counter[1]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.101      ; 1.039      ;
 ; 0.726 ; read_request:rd|sec_counter[3]                    ; read_request:rd|sec_counter[3]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.101      ; 1.039      ;
-; 0.726 ; DS1302_controller:Controller|state.TERMINATE      ; DS1302_controller:Controller|WP_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.018      ;
 ; 0.744 ; read_request:rd|sec_counter[5]                    ; read_request:rd|sec_counter[5]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.036      ;
 ; 0.744 ; read_request:rd|sec_counter[7]                    ; read_request:rd|sec_counter[7]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.036      ;
 ; 0.744 ; read_request:rd|sec_counter[15]                   ; read_request:rd|sec_counter[15]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.037      ;
@@ -568,8 +567,8 @@ No paths to report.
 ; 0.756 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[3]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.572      ; 1.540      ;
 ; 0.761 ; read_request:rd|sec_counter[9]                    ; read_request:rd|sec_counter[9]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.053      ;
 ; 0.764 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[0]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.056      ;
-; 0.765 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[8]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.057      ;
 ; 0.765 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|addr[0]              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.057      ;
+; 0.765 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[8]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.057      ;
 ; 0.766 ; read_request:rd|sec_counter[14]                   ; read_request:rd|sec_counter[14]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.059      ;
 ; 0.771 ; DS1302_controller:Controller|count[5]             ; DS1302_controller:Controller|count[5]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.064      ;
 ; 0.775 ; DS1302_controller:Controller|count[4]             ; DS1302_controller:Controller|count[4]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.068      ;
@@ -610,8 +609,8 @@ No paths to report.
 ; 1.118 ; read_request:rd|sec_counter[2]                    ; read_request:rd|sec_counter[4]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.410      ;
 ; 1.118 ; read_request:rd|sec_counter[4]                    ; read_request:rd|sec_counter[6]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.410      ;
 ; 1.118 ; read_request:rd|sec_counter[6]                    ; read_request:rd|sec_counter[8]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.410      ;
-; 1.126 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[9]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.418      ;
 ; 1.126 ; DS1302_controller:Controller|count[5]             ; DS1302_controller:Controller|count[6]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.419      ;
+; 1.126 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[9]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.080      ; 1.418      ;
 ; 1.127 ; read_request:rd|sec_counter[14]                   ; read_request:rd|sec_counter[15]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.420      ;
 ; 1.134 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[10]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.081      ; 1.427      ;
 +-------+---------------------------------------------------+---------------------------------------------------+--------------------+--------------------+--------------+------------+------------+
@@ -1005,6 +1004,12 @@ No paths to report.
 +-------+---------------------------------------------------+---------------------------------------------------+--------------------+--------------------+--------------+------------+------------+
 ; Slack ; From Node                                         ; To Node                                           ; Launch Clock       ; Latch Clock        ; Relationship ; Clock Skew ; Data Delay ;
 +-------+---------------------------------------------------+---------------------------------------------------+--------------------+--------------------+--------------+------------+------------+
+; 0.402 ; DS1302_controller:Controller|io_dir               ; DS1302_controller:Controller|io_dir               ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
+; 0.402 ; DS1302_controller:Controller|CE                   ; DS1302_controller:Controller|CE                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
+; 0.402 ; DS1302_controller:Controller|read_request         ; DS1302_controller:Controller|read_request         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
+; 0.402 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|WP_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
+; 0.402 ; DS1302_controller:Controller|CH_init              ; DS1302_controller:Controller|CH_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
+; 0.402 ; DS1302_controller:Controller|state.IDLE           ; DS1302_controller:Controller|state.IDLE           ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
 ; 0.402 ; DS1302_controller:Controller|time_out[20]         ; DS1302_controller:Controller|time_out[20]         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
 ; 0.402 ; DS1302_controller:Controller|time_out[21]         ; DS1302_controller:Controller|time_out[21]         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
 ; 0.402 ; DS1302_controller:Controller|time_out[19]         ; DS1302_controller:Controller|time_out[19]         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
@@ -1025,12 +1030,6 @@ No paths to report.
 ; 0.402 ; DS1302_controller:Controller|time_out[0]          ; DS1302_controller:Controller|time_out[0]          ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
 ; 0.402 ; DS1302_controller:Controller|time_out[3]          ; DS1302_controller:Controller|time_out[3]          ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
 ; 0.402 ; DS1302_controller:Controller|time_out[1]          ; DS1302_controller:Controller|time_out[1]          ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
-; 0.402 ; DS1302_controller:Controller|io_dir               ; DS1302_controller:Controller|io_dir               ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
-; 0.402 ; DS1302_controller:Controller|CE                   ; DS1302_controller:Controller|CE                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
-; 0.402 ; DS1302_controller:Controller|read_request         ; DS1302_controller:Controller|read_request         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
-; 0.402 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|WP_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
-; 0.402 ; DS1302_controller:Controller|CH_init              ; DS1302_controller:Controller|CH_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
-; 0.402 ; DS1302_controller:Controller|state.IDLE           ; DS1302_controller:Controller|state.IDLE           ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.669      ;
 ; 0.470 ; DS1302_controller:Controller|count[6]             ; DS1302_controller:Controller|count[6]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.737      ;
 ; 0.493 ; DS1302_controller:Controller|CH_init              ; DS1302_controller:Controller|addr[0]              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.760      ;
 ; 0.522 ; DS1302_controller:Controller|state.IDLE           ; DS1302_controller:Controller|CE                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.789      ;
@@ -1061,8 +1060,8 @@ No paths to report.
 ; 0.709 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|addr[0]              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.976      ;
 ; 0.710 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[8]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.073      ; 0.978      ;
 ; 0.712 ; read_request:rd|sec_counter[14]                   ; read_request:rd|sec_counter[14]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.979      ;
-; 0.715 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[0]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.073      ; 0.983      ;
 ; 0.715 ; DS1302_controller:Controller|count[5]             ; DS1302_controller:Controller|count[5]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.982      ;
+; 0.715 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[0]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.073      ; 0.983      ;
 ; 0.720 ; DS1302_controller:Controller|count[4]             ; DS1302_controller:Controller|count[4]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 0.987      ;
 ; 0.740 ; DS1302_controller:Controller|count[1]             ; DS1302_controller:Controller|count[1]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 1.007      ;
 ; 0.748 ; DS1302_controller:Controller|count[3]             ; DS1302_controller:Controller|count[3]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.072      ; 1.015      ;
@@ -1486,6 +1485,11 @@ No paths to report.
 ; Slack ; From Node                                         ; To Node                                           ; Launch Clock       ; Latch Clock        ; Relationship ; Clock Skew ; Data Delay ;
 +-------+---------------------------------------------------+---------------------------------------------------+--------------------+--------------------+--------------+------------+------------+
 ; 0.186 ; DS1302_controller:Controller|io_dir               ; DS1302_controller:Controller|io_dir               ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.307      ;
+; 0.187 ; DS1302_controller:Controller|CE                   ; DS1302_controller:Controller|CE                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
+; 0.187 ; DS1302_controller:Controller|read_request         ; DS1302_controller:Controller|read_request         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
+; 0.187 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|WP_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
+; 0.187 ; DS1302_controller:Controller|CH_init              ; DS1302_controller:Controller|CH_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
+; 0.187 ; DS1302_controller:Controller|state.IDLE           ; DS1302_controller:Controller|state.IDLE           ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
 ; 0.187 ; DS1302_controller:Controller|time_out[20]         ; DS1302_controller:Controller|time_out[20]         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
 ; 0.187 ; DS1302_controller:Controller|time_out[21]         ; DS1302_controller:Controller|time_out[21]         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
 ; 0.187 ; DS1302_controller:Controller|time_out[19]         ; DS1302_controller:Controller|time_out[19]         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
@@ -1506,11 +1510,6 @@ No paths to report.
 ; 0.187 ; DS1302_controller:Controller|time_out[0]          ; DS1302_controller:Controller|time_out[0]          ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
 ; 0.187 ; DS1302_controller:Controller|time_out[3]          ; DS1302_controller:Controller|time_out[3]          ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
 ; 0.187 ; DS1302_controller:Controller|time_out[1]          ; DS1302_controller:Controller|time_out[1]          ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
-; 0.187 ; DS1302_controller:Controller|CE                   ; DS1302_controller:Controller|CE                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
-; 0.187 ; DS1302_controller:Controller|read_request         ; DS1302_controller:Controller|read_request         ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
-; 0.187 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|WP_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
-; 0.187 ; DS1302_controller:Controller|CH_init              ; DS1302_controller:Controller|CH_init              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
-; 0.187 ; DS1302_controller:Controller|state.IDLE           ; DS1302_controller:Controller|state.IDLE           ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.307      ;
 ; 0.205 ; DS1302_controller:Controller|count[6]             ; DS1302_controller:Controller|count[6]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.325      ;
 ; 0.208 ; DS1302_controller:Controller|CH_init              ; DS1302_controller:Controller|addr[0]              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.328      ;
 ; 0.221 ; DS1302_controller:Controller|state.IDLE           ; DS1302_controller:Controller|CE                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.341      ;
@@ -1538,8 +1537,8 @@ No paths to report.
 ; 0.300 ; read_request:rd|sec_counter[16]                   ; read_request:rd|sec_counter[16]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.420      ;
 ; 0.303 ; read_request:rd|sec_counter[9]                    ; read_request:rd|sec_counter[9]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.424      ;
 ; 0.305 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[8]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.426      ;
-; 0.307 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[0]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.428      ;
 ; 0.307 ; DS1302_controller:Controller|WP_init              ; DS1302_controller:Controller|addr[0]              ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.427      ;
+; 0.307 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[0]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.428      ;
 ; 0.308 ; read_request:rd|sec_counter[14]                   ; read_request:rd|sec_counter[14]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.428      ;
 ; 0.310 ; DS1302_controller:Controller|count[5]             ; DS1302_controller:Controller|count[5]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.430      ;
 ; 0.312 ; DS1302_controller:Controller|count[4]             ; DS1302_controller:Controller|count[4]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.432      ;
@@ -1574,16 +1573,16 @@ No paths to report.
 ; 0.458 ; read_request:rd|sec_counter[16]                   ; read_request:rd|sec_counter[17]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.578      ;
 ; 0.458 ; read_request:rd|sec_counter[18]                   ; read_request:rd|sec_counter[19]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.578      ;
 ; 0.458 ; read_request:rd|sec_counter[12]                   ; read_request:rd|sec_counter[13]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.578      ;
+; 0.459 ; DS1302_controller:Controller|count[5]             ; DS1302_controller:Controller|count[6]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.579      ;
 ; 0.459 ; read_request:rd|sec_counter[0]                    ; read_request:rd|sec_counter[2]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.580      ;
 ; 0.459 ; read_request:rd|sec_counter[10]                   ; read_request:rd|sec_counter[12]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.579      ;
 ; 0.459 ; read_request:rd|sec_counter[6]                    ; read_request:rd|sec_counter[8]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.580      ;
-; 0.459 ; DS1302_controller:Controller|count[5]             ; DS1302_controller:Controller|count[6]             ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.579      ;
 ; 0.460 ; read_request:rd|sec_counter[2]                    ; read_request:rd|sec_counter[4]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.581      ;
 ; 0.460 ; read_request:rd|sec_counter[4]                    ; read_request:rd|sec_counter[6]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.581      ;
 ; 0.461 ; read_request:rd|sec_counter[12]                   ; read_request:rd|sec_counter[14]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.581      ;
 ; 0.461 ; read_request:rd|sec_counter[16]                   ; read_request:rd|sec_counter[18]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.581      ;
-; 0.463 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[9]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.584      ;
 ; 0.463 ; DS1302_controller:Controller|addr[0]              ; DS1302_controller:Controller|io_dir               ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.038      ; 0.585      ;
+; 0.463 ; read_request:rd|sec_counter[8]                    ; read_request:rd|sec_counter[9]                    ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.037      ; 0.584      ;
 ; 0.466 ; read_request:rd|sec_counter[14]                   ; read_request:rd|sec_counter[15]                   ; CLK_div:cl|clk_out ; CLK_div:cl|clk_out ; 0.000        ; 0.036      ; 0.586      ;
 +-------+---------------------------------------------------+---------------------------------------------------+--------------------+--------------------+--------------+------------+------------+
 
@@ -1904,7 +1903,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Mon Jul 20 18:36:50 2026
+    Info: Processing started: Tue Jul 21 00:55:14 2026
 Info: Command: quartus_sta prueba_rtc_DS1302 -c prueba_rtc_DS1302
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -1986,9 +1985,9 @@ Info (332146): Worst-case minimum pulse width slack is -3.000
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 4767 megabytes
-    Info: Processing ended: Mon Jul 20 18:36:53 2026
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 4775 megabytes
+    Info: Processing ended: Tue Jul 21 00:55:18 2026
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
 
 

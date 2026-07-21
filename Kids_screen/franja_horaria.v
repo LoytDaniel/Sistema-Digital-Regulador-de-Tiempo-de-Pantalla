@@ -1,6 +1,5 @@
 module franja_horaria (
     input reset,
-    input kids,
     input [7:0] inicio_hr, inicio_min,
     input [7:0] final_hr, final_min,
     input [7:0] current_time_H, current_time_M,
@@ -26,7 +25,7 @@ always @(*) begin
     if(reset) begin
         temp_enable = 0;
     end
-    else if (kids & cumple_franja) begin
+    else if (cumple_franja) begin
         temp_enable = 1;
     end
     else begin

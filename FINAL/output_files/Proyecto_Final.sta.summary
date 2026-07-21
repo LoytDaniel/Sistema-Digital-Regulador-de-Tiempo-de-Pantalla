@@ -3,75 +3,59 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'Timer:pt|clk_10ms'
-Slack : -90.623
-TNS   : -1557.069
+Slack : -90.005
+TNS   : -1632.508
 
 Type  : Slow 1200mV 85C Model Setup 'LCD12864_controller:inst|clk_10'
-Slack : -15.600
-TNS   : -244.312
+Slack : -14.365
+TNS   : -223.574
 
 Type  : Slow 1200mV 85C Model Setup 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
-Slack : -9.235
-TNS   : -192.344
+Slack : -10.196
+TNS   : -174.403
 
 Type  : Slow 1200mV 85C Model Setup 'fsm_screen:FS|state.MENU'
-Slack : -6.236
-TNS   : -1178.193
-
-Type  : Slow 1200mV 85C Model Setup 'fsm_screen:FS|state.ADULT'
-Slack : -6.018
-TNS   : -456.254
+Slack : -6.917
+TNS   : -1534.340
 
 Type  : Slow 1200mV 85C Model Setup 'Keyboard_top:keyboard|clock:clk_div|count'
-Slack : -4.555
-TNS   : -368.063
+Slack : -5.017
+TNS   : -376.656
 
 Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : -4.477
-TNS   : -433.386
-
-Type  : Slow 1200mV 85C Model Hold 'fsm_screen:FS|state.ADULT'
-Slack : 0.389
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
-Slack : 0.432
-TNS   : 0.000
+Slack : -4.593
+TNS   : -447.731
 
 Type  : Slow 1200mV 85C Model Hold 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
-Slack : 0.433
+Slack : 0.452
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'LCD12864_controller:inst|clk_10'
 Slack : 0.452
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'Timer:pt|clk_10ms'
+Type  : Slow 1200mV 85C Model Hold 'clk'
 Slack : 0.452
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'clk'
+Type  : Slow 1200mV 85C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
 Slack : 0.453
 TNS   : 0.000
 
+Type  : Slow 1200mV 85C Model Hold 'Timer:pt|clk_10ms'
+Slack : 0.454
+TNS   : 0.000
+
 Type  : Slow 1200mV 85C Model Hold 'fsm_screen:FS|state.MENU'
-Slack : 0.557
+Slack : 0.816
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Recovery 'fsm_screen:FS|state.MENU'
-Slack : -5.317
-TNS   : -927.280
-
-Type  : Slow 1200mV 85C Model Recovery 'fsm_screen:FS|state.ADULT'
-Slack : -4.492
-TNS   : -214.654
-
-Type  : Slow 1200mV 85C Model Removal 'fsm_screen:FS|state.ADULT'
-Slack : 0.421
-TNS   : 0.000
+Slack : -7.714
+TNS   : -1609.199
 
 Type  : Slow 1200mV 85C Model Removal 'fsm_screen:FS|state.MENU'
-Slack : 0.495
+Slack : 0.432
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
@@ -94,84 +78,64 @@ Type  : Slow 1200mV 85C Model Minimum Pulse Width 'LCD12864_controller:inst|clk_
 Slack : -1.487
 TNS   : -49.071
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'fsm_screen:FS|state.ADULT'
-Slack : 0.321
-TNS   : 0.000
-
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'fsm_screen:FS|state.MENU'
 Slack : 0.351
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'Timer:pt|clk_10ms'
-Slack : -82.977
-TNS   : -1434.262
+Slack : -82.462
+TNS   : -1499.344
 
 Type  : Slow 1200mV 0C Model Setup 'LCD12864_controller:inst|clk_10'
-Slack : -14.486
-TNS   : -224.754
+Slack : -13.367
+TNS   : -206.439
 
 Type  : Slow 1200mV 0C Model Setup 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
-Slack : -8.439
-TNS   : -176.806
+Slack : -9.335
+TNS   : -158.812
 
 Type  : Slow 1200mV 0C Model Setup 'fsm_screen:FS|state.MENU'
-Slack : -6.064
-TNS   : -1122.977
-
-Type  : Slow 1200mV 0C Model Setup 'fsm_screen:FS|state.ADULT'
-Slack : -5.874
-TNS   : -439.164
+Slack : -6.699
+TNS   : -1462.952
 
 Type  : Slow 1200mV 0C Model Setup 'Keyboard_top:keyboard|clock:clk_div|count'
-Slack : -4.242
-TNS   : -337.312
+Slack : -4.797
+TNS   : -343.549
 
 Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : -4.241
-TNS   : -395.371
-
-Type  : Slow 1200mV 0C Model Hold 'fsm_screen:FS|state.ADULT'
-Slack : 0.320
-TNS   : 0.000
+Slack : -4.268
+TNS   : -409.860
 
 Type  : Slow 1200mV 0C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
-Slack : 0.382
+Slack : 0.400
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.400
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
-Slack : 0.383
+Slack : 0.401
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'LCD12864_controller:inst|clk_10'
-Slack : 0.400
+Slack : 0.401
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'Timer:pt|clk_10ms'
 Slack : 0.402
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Hold 'clk'
-Slack : 0.402
-TNS   : 0.000
-
 Type  : Slow 1200mV 0C Model Hold 'fsm_screen:FS|state.MENU'
-Slack : 0.469
+Slack : 0.936
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Recovery 'fsm_screen:FS|state.MENU'
-Slack : -5.339
-TNS   : -942.164
-
-Type  : Slow 1200mV 0C Model Recovery 'fsm_screen:FS|state.ADULT'
-Slack : -4.439
-TNS   : -226.657
+Slack : -7.412
+TNS   : -1561.203
 
 Type  : Slow 1200mV 0C Model Removal 'fsm_screen:FS|state.MENU'
-Slack : 0.427
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Removal 'fsm_screen:FS|state.ADULT'
-Slack : 0.599
+Slack : 0.588
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
@@ -180,7 +144,7 @@ TNS   : -221.589
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Keyboard_top:keyboard|clock:clk_div|count'
 Slack : -1.487
-TNS   : -187.515
+TNS   : -187.362
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Timer:pt|clk_10ms'
 Slack : -1.487
@@ -194,55 +158,39 @@ Type  : Slow 1200mV 0C Model Minimum Pulse Width 'LCD12864_controller:inst|clk_1
 Slack : -1.487
 TNS   : -49.071
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'fsm_screen:FS|state.ADULT'
-Slack : 0.151
-TNS   : 0.000
-
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'fsm_screen:FS|state.MENU'
-Slack : 0.195
+Slack : 0.197
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'Timer:pt|clk_10ms'
-Slack : -38.795
-TNS   : -638.037
+Slack : -38.345
+TNS   : -668.375
 
 Type  : Fast 1200mV 0C Model Setup 'LCD12864_controller:inst|clk_10'
-Slack : -6.306
-TNS   : -87.919
+Slack : -5.722
+TNS   : -79.013
 
 Type  : Fast 1200mV 0C Model Setup 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
-Slack : -3.364
-TNS   : -49.453
+Slack : -3.829
+TNS   : -37.598
 
 Type  : Fast 1200mV 0C Model Setup 'fsm_screen:FS|state.MENU'
-Slack : -2.274
-TNS   : -404.741
-
-Type  : Fast 1200mV 0C Model Setup 'fsm_screen:FS|state.ADULT'
-Slack : -2.198
-TNS   : -156.892
+Slack : -2.590
+TNS   : -549.241
 
 Type  : Fast 1200mV 0C Model Setup 'Keyboard_top:keyboard|clock:clk_div|count'
-Slack : -1.502
-TNS   : -101.682
+Slack : -1.631
+TNS   : -102.090
 
 Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : -1.393
-TNS   : -103.693
-
-Type  : Fast 1200mV 0C Model Hold 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
-Slack : 0.178
-TNS   : 0.000
+Slack : -1.453
+TNS   : -106.376
 
 Type  : Fast 1200mV 0C Model Hold 'Keyboard_top:keyboard|clock:clk_div|count'
-Slack : 0.178
+Slack : 0.166
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'LCD12864_controller:inst|clk_10'
-Slack : 0.186
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'Timer:pt|clk_10ms'
 Slack : 0.186
 TNS   : 0.000
 
@@ -250,33 +198,29 @@ Type  : Fast 1200mV 0C Model Hold 'clk'
 Slack : 0.186
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Hold 'fsm_screen:FS|state.ADULT'
-Slack : 0.249
+Type  : Fast 1200mV 0C Model Hold 'DS1302_Top_final:DS1302|CLK_div:cl|clk_out'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Timer:pt|clk_10ms'
+Slack : 0.187
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'fsm_screen:FS|state.MENU'
-Slack : 0.321
+Slack : 0.385
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Recovery 'fsm_screen:FS|state.MENU'
-Slack : -1.953
-TNS   : -298.088
-
-Type  : Fast 1200mV 0C Model Recovery 'fsm_screen:FS|state.ADULT'
-Slack : -1.491
-TNS   : -48.216
+Slack : -2.989
+TNS   : -582.707
 
 Type  : Fast 1200mV 0C Model Removal 'fsm_screen:FS|state.MENU'
-Slack : 0.178
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Removal 'fsm_screen:FS|state.ADULT'
-Slack : 0.217
+Slack : 0.246
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -160.229
+TNS   : -159.638
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Keyboard_top:keyboard|clock:clk_div|count'
 Slack : -1.000
@@ -295,11 +239,7 @@ Slack : -1.000
 TNS   : -33.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'fsm_screen:FS|state.MENU'
-Slack : 0.322
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'fsm_screen:FS|state.ADULT'
-Slack : 0.334
+Slack : 0.329
 TNS   : 0.000
 
 ------------------------------------------------------------

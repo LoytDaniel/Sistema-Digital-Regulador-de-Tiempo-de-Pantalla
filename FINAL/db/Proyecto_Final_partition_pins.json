@@ -88,7 +88,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "pause",
 					"strict" : false
 				},
 				{
@@ -96,11 +96,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "clk",
+					"name" : "reset",
 					"strict" : false
 				},
 				{
-					"name" : "pause",
+					"name" : "clk",
 					"strict" : false
 				},
 				{
@@ -124,11 +124,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "ext_input[4]",
-					"strict" : false
-				},
-				{
-					"name" : "ext_input[5]",
+					"name" : "ext_input[2]",
 					"strict" : false
 				},
 				{
@@ -136,7 +132,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "ext_input[2]",
+					"name" : "ext_input[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ext_input[5]",
 					"strict" : false
 				},
 				{

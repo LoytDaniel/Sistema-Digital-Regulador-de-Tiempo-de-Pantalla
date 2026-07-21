@@ -26,7 +26,7 @@ module LCD12864_controller #(
     input [7:0] left_time_H, left_time_M,
     input [7:0] current_hr, current_min,
     input [2:0] num_ingresados,
-    input pass_incorrecta,
+    input pass_incorrecta, timer_enable,
     input [7:0] tiempo_hr, tiempo_min,
     input [7:0] inicio_hr, inicio_min,
     input [7:0] final_hr, final_min,
@@ -43,6 +43,8 @@ reg [7:0] setting_mem [0:1023];
 
 reg [7:0] pixel_asterisco [0:6];
 reg [7:0] pixel_guion [0:6];
+reg [7:0] PLAY [0:6];
+reg [7:0] PAUSE [0:6];
 
 //Contador para el parpadeo del cursor en la pantalla de configuración
 reg [24:0] blink_cnt;
@@ -68,6 +70,7 @@ localparam DISPLAY_OFF = 8'h3E;  // 0011 1110  – Display OFF
 localparam SET_START_L0 = 8'hC0;  // 1100 0000  – Start line = 0
 localparam SET_PAGE_0 = 8'hB8;  // 1011 1000  – Página (X) = 0
 localparam SET_Y_0 = 8'h40;  // 0100 0000  – Y address = 0
+
 
 //estados
 localparam IDLE = 3'd0;
@@ -146,6 +149,20 @@ initial begin
     config_mem[1] <= SET_PAGE_0;    // Página 0 (X address)
     config_mem[2] <= SET_Y_0;       // Y address = 0
     config_mem[3] <= DISPLAY_ON;    // Display ON
+	 PLAY[0] = 8'h00;
+	 PLAY[1] = 8'hFE;
+	 PLAY[2] = 8'hFE;
+	 PLAY[3] = 8'h7C;
+	 PLAY[4] = 8'h38;
+	 PLAY[5] = 8'h10;
+	 PLAY[6] = 8'h00;
+	 PAUSE[0] = 8'h00;
+	 PAUSE[1] = 8'hFF;
+	 PAUSE[2] = 8'hFF;
+	 PAUSE[3] = 8'h00;
+	 PAUSE[4] = 8'hFF;
+	 PAUSE[5] = 8'hFF;
+	 PAUSE[6] = 8'h00;
 end
 
 wire [55:0] left_time_hr_pix_dec, left_time_hr_pix_uni, left_time_min_pix_dec, left_time_min_pix_uni;
@@ -237,6 +254,15 @@ always @(*) begin
             graphic_mem[437+j]=left_time_hr_pixel_uni[6-j];
             graphic_mem[448+j]=left_time_min_pixel_dec[6-j];
             graphic_mem[455+j]=left_time_min_pixel_uni[6-j];
+        end
+        if (timer_enable) begin
+            for (j = 0; j < 7; j = j + 1) begin
+                graphic_mem[699+j]=PLAY[j];
+            end
+        end else begin
+            for (j = 0; j < 7; j = j + 1) begin
+                graphic_mem[699+j]=PAUSE[j];
+            end
         end
     end
     else if (password) begin

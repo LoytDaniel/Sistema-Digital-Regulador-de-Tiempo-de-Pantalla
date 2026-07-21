@@ -1,38 +1,4 @@
-//=====================================================================
-// Modulo: config_logica
-// Descripcion: Logica de control (SIN manejo de LCD) para la pantalla
-//              de CONFIGURACION del sistema de control parental.
-//
-//              Permite al usuario elegir una de 3 filas:
-//                  1 -> TIEMPO   (temporizador)
-//                  2 -> INICIO   (franja horaria - inicio)
-//                  3 -> FINAL    (franja horaria - final)
-//
-//              y luego editar sus 4 digitos, en este orden fijo:
-//                  decena hora -> unidad hora -> decena minuto -> unidad minuto
-//
-//              Al completar el 4to digito, regresa automaticamente a
-//              esperar una nueva seleccion de fila (1, 2 o 3).
-//
-// Codificacion de posicion_fila:
-//      00 = Tiempo   01 = Inicio   10 = Final
-// Codificacion de posicion_columna:
-//      00 = decena hora   01 = unidad hora
-//      10 = decena minuto 11 = unidad minuto
-//
-// Notas / supuestos de diseno:
-//   - key_out solo se interpreta como digito valido si esta en el
-//     rango 0-9. Cualquier otro valor (letras/simbolos del teclado,
-//     que llegan por defecto como 4'b1111) se ignora como digito.
-//   - Aceptar, presionado durante la edicion de una fila, finaliza
-//     esa edicion de forma anticipada (los digitos que no se
-//     alcanzaron a ingresar conservan su valor anterior) y regresa
-//     a la seleccion de opcion 1/2/3.
-//   - "exit" es un pulso de 1 ciclo de reloj cuando se detecta Salir.
-//   - Los valores configurados (tiempo/inicio/final) se guardan en
-//     registros y se conservan aunque el usuario salga del modulo o
-//     "setting" se desactive (no se borran, solo se dejan de leer
-//     nuevas teclas).
+
 //=====================================================================
 
 module config_logicaFull (
@@ -40,11 +6,11 @@ module config_logicaFull (
     input  wire rst,
     input  wire Aceptar,
     input  wire Salir,
-    input  wire setting,       // enable dado por la FSM superior
-    input  wire [3:0] key_out,       // digito BCD del teclado (0-9), 4'b1111 = no valido
-    input  wire push_button,   // pulso "hay una tecla nueva" del teclado
+    input  wire setting,       // enable dado por la FSM de menu
+    input  wire [3:0] key_out,     
+    input  wire push_button,  
 
-    output reg  exit,          // bandera de 1 ciclo hacia la FSM superior
+    output reg  exit,          // bandera hacia la FSM de menu
     output reg  [7:0] tiempo_hr,     // [7:4]=decena [3:0]=unidad
     output reg  [7:0] tiempo_min,    // [7:4]=decena [3:0]=unidad
     output reg  [7:0] inicio_hr,     // [7:4]=decena [3:0]=unidad
@@ -56,13 +22,13 @@ module config_logicaFull (
 );
 
     //-----------------------------------------------------------------
-    // Valores por defecto (formato BCD, un nibble hex = un digito)
+    // Valores por defecto 
     //-----------------------------------------------------------------
-    localparam [7:0] TIEMPO_HR_DEF  = 8'h01; // 2 horas
+    localparam [7:0] TIEMPO_HR_DEF  = 8'h02; // 2 horas
     localparam [7:0] TIEMPO_MIN_DEF = 8'h00; // 0 minutos
     localparam [7:0] INICIO_HR_DEF  = 8'h09; // 09
     localparam [7:0] INICIO_MIN_DEF = 8'h00; // 00
-    localparam [7:0] FINAL_HR_DEF   = 8'h23; // 19
+    localparam [7:0] FINAL_HR_DEF   = 8'h06; // 19
     localparam [7:0] FINAL_MIN_DEF  = 8'h00; // 00
 
     //-----------------------------------------------------------------
@@ -91,8 +57,7 @@ module config_logicaFull (
     reg estado;
 
     //-----------------------------------------------------------------
-    // Deteccion de flanco de subida (evita lectura multiple con la
-    // tecla sostenida)
+    // Deteccion de flanco de subida 
     //-----------------------------------------------------------------
     reg push_button_d, Aceptar_d, Salir_d;
 
@@ -118,7 +83,7 @@ module config_logicaFull (
     wire key_es_digito = (key_out <= 4'd9);
 
     //-----------------------------------------------------------------
-    // Saturacion combinacional de decenas
+    // Saturacion combinacional de decenas, basicamente brinda limites horarios
     //-----------------------------------------------------------------
     wire [3:0] dec_hr_sat  = (key_out > MAX_DEC_HORA) ? MAX_DEC_HORA : key_out;
     wire [3:0] dec_min_sat = (key_out > MAX_DEC_MIN)  ? MAX_DEC_MIN  : key_out;
@@ -155,7 +120,7 @@ module config_logicaFull (
 
             if (Salir_re) begin
                 // El usuario sale del modulo de configuracion.
-                // Los valores ya guardados (tiempo/inicio/final) NO se tocan.
+                // Los valores ya guardados (tiempo/inicio/final) se mantienen
                 exit             <= 1'b1;
                 estado           <= ST_SELECT;
                 posicion_columna <= COL_DEC_HR;
@@ -164,8 +129,7 @@ module config_logicaFull (
                 case (estado)
 
                     //---------------------------------------------
-                    // Esperando que el usuario elija 1 (Tiempo),
-                    // 2 (Inicio) o 3 (Final)
+                    // Espera a que el usuario elija 1 (Tiempo) 2 (Inicio) o 3 (Final)
                     //---------------------------------------------
                     ST_SELECT: begin
                         if (push_button_re) begin
@@ -186,7 +150,7 @@ module config_logicaFull (
                                     estado           <= ST_EDIT;
                                 end
                                 default: begin
-                                    // tecla no valida para esta seleccion (ej. 4-9, letras): se ignora
+                                    // tecla no valida  (por ejemplo 4-9 o las letras) las ignora
                                 end
                             endcase
                         end
@@ -196,20 +160,18 @@ module config_logicaFull (
                     end
 
                     //---------------------------------------------
-                    // Editando los 4 digitos de la fila seleccionada
+                    // Edita los 4 digitos de la fila seleccionada
                     //---------------------------------------------
                     ST_EDIT: begin
                         if (Aceptar_re) begin
-                            // Se acepta la edicion (completa o parcial) y
-                            // se regresa a elegir opcion. Los digitos no
-                            // alcanzados a ingresar conservan su valor previo.
+                            // Se acepta la edicion completa o parcial y se regresa a elegir opcion. Los digitos no alcanzados a ingresar conservan su valor previo.
                             estado           <= ST_SELECT;
                             posicion_columna <= COL_DEC_HR;
 
                         end else if (push_button_re && key_es_digito) begin
                             case (posicion_columna)
 
-                                //----- Decena de hora -----
+                                //Decena de hora 
                                 COL_DEC_HR: begin
                                     case (posicion_fila)
                                         FILA_TIEMPO: tiempo_hr[7:4] <= dec_hr_sat;
@@ -219,9 +181,8 @@ module config_logicaFull (
                                     posicion_columna <= COL_UNI_HR;
                                 end
 
-                                //----- Unidad de hora -----
-                                // Si la decena guardada es 2, la unidad se
-                                // topa en 3 (23 max). Si no, la unidad es libre (0-9).
+                                //Unidad de hora
+                                // Si la decena guardada es 2, la unidad se topa en 3 (23 max). Si no, la unidad es libre (0-9).
                                 COL_UNI_HR: begin
                                     case (posicion_fila)
                                         FILA_TIEMPO: begin
@@ -246,7 +207,7 @@ module config_logicaFull (
                                     posicion_columna <= COL_DEC_MIN;
                                 end
 
-                                //----- Decena de minuto -----
+                                //Decena de minuto
                                 COL_DEC_MIN: begin
                                     case (posicion_fila)
                                         FILA_TIEMPO: tiempo_min[7:4] <= dec_min_sat;
@@ -256,14 +217,14 @@ module config_logicaFull (
                                     posicion_columna <= COL_UNI_MIN;
                                 end
 
-                                //----- Unidad de minuto (no requiere saturacion) -----
+                                //Unidad de minuto
                                 COL_UNI_MIN: begin
                                     case (posicion_fila)
                                         FILA_TIEMPO: tiempo_min[3:0] <= key_out;
                                         FILA_INICIO: inicio_min[3:0] <= key_out;
                                         FILA_FINAL:  final_min[3:0]  <= key_out;
                                     endcase
-                                    // Fila completa -> vuelve a esperar seleccion de opcion
+                                    // Fila completa  y vuelve a esperar seleccion de opcion
                                     estado           <= ST_SELECT;
                                     posicion_columna <= COL_DEC_HR;
                                 end
@@ -273,9 +234,7 @@ module config_logicaFull (
                 endcase
             end
         end
-        // Si setting = 0: no se toca ningun registro. Se conserva tanto la
-        // posicion de navegacion (estado/fila/columna) como los valores
-        // ya configurados de tiempo/inicio/final.
+
     end
 
 endmodule

@@ -10,18 +10,17 @@ module Timer #(
     input [7:0] limit_time_H, limit_time_M,
 
     output [7:0] left_time_BCD_H, left_time_BCD_M,
-    output reg off_enable 
+    output reg off_enable, 
+    output timer_enable
 );
 
 reg [16:0] start_time_second, current_time_second, timer_second, limit_time_second, left_time_saved;
-reg [7:0] left_time [0:1];
+reg [5:0] left_time [0:1];
 reg subtract_enable;
+reg [7:0] a;
 wire pause_cleaned, start_cleaned;
 
-initial begin
-    left_time[0]=limit_time_H;//((seconds(limit_time_H, limit_time_M, 8'd0)) % 3600) /60;
-    left_time[1]=limit_time_M;//(seconds(limit_time_H, limit_time_M, 8'd0) / 3600);
-end
+assign timer_enable=subtract_enable;
 
 // ---------------------------------------------------------------------------
 // Divisor de frecuencia → clk_10ms
@@ -54,7 +53,6 @@ end
     );
 
 // Instancia para detener y continuar el temporizador
-// Reemplaza los dos always de start_cleaned/pause_cleaned por esto:
 
 reg start_cleaned_d, pause_cleaned_d;
 
@@ -73,10 +71,11 @@ assign reset_day = ((current_time_H == 8'd0) && (current_time_M == 8'd0)) ? 1'b1
 
 always @(posedge clk_10ms) begin
 
+    limit_time_second <= seconds(limit_time_H, limit_time_M, 8'd0)+17'd59;
     if (reset_day || reset) begin //usarlo cuando paso un dia y que vuelva todo a 0
 
-        left_time[0] <= 8'd0;
-        left_time[1] <= 8'd0;
+        left_time[0] <= ((limit_time_second) % 3600) /60; //minutos
+        left_time[1] <= (limit_time_second) / 3600; //horas
         off_enable <= 1'b0;
         subtract_enable <= 1'b0;
         timer_second <= 11'd0;
@@ -87,7 +86,6 @@ always @(posedge clk_10ms) begin
 
         if (start_edge && ~subtract_enable) begin
         start_time_second <= seconds(current_time_H, current_time_M, current_time_S);
-        limit_time_second <= seconds(limit_time_H, limit_time_M, 8'd0);
         subtract_enable <= 1'b1;
         end
 
@@ -101,9 +99,10 @@ always @(posedge clk_10ms) begin
             current_time_second= (seconds(current_time_H,current_time_M, current_time_S));
             timer_second=(current_time_second-start_time_second+left_time_saved);
 
-            if (timer_second >= (limit_time_second)) begin
+            if (timer_second >= (limit_time_second-17'd0)) begin
                 left_time[0] <= 8'd0;
                 left_time[1] <= 8'd0;
+                timer_second=limit_time_second;
                 subtract_enable <= 1'b0;
                 off_enable <= 1'b1;
 
@@ -121,7 +120,9 @@ always @(posedge clk_10ms) begin
             left_time[0] <= 8'd0;
             left_time[1] <= 8'd0;
         end else begin
-             left_time_saved <= timer_second;
+            left_time_saved <= timer_second;
+            left_time[0] <= ((limit_time_second - left_time_saved) % 3600) /60; //minutos
+            left_time[1] <= (limit_time_second - left_time_saved) / 3600; //horas
         end
         subtract_enable <= 1'b0;
         off_enable <= 1'b1;

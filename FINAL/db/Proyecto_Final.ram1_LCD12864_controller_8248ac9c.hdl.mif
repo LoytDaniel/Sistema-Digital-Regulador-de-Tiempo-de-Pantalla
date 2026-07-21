@@ -1,0 +1,18 @@
+-- begin_signature
+-- LCD12864_controller
+-- end_signature
+WIDTH=8;
+DEPTH=7;
+
+ADDRESS_RADIX=UNS;
+DATA_RADIX=BIN;
+
+CONTENT BEGIN
+	6 :	00000000;
+	5 :	00010000;
+	4 :	00111000;
+	3 :	01111100;
+	2 :	11111110;
+	1 :	11111110;
+	0 :	00000000;
+END;
