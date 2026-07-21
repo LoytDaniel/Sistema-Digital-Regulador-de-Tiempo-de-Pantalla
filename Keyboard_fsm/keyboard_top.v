@@ -1,26 +1,27 @@
-module keyboard_top (
+module Keyboard_top (
     input clk, reset,
     input [3:0] col,
-
     output [3:0] row,
-    output [3:0] key_out,
-    output push_button
+    output [3:0] key_out, //key_in,
+    output push_button,
+	 output Aceptar, Borrar, Salir,//, is_digit
+	 output clk1
 );
 
-wire clk1, contar;
+
+wire contar;
 wire [1:0] count;
 wire [1:0] row_reg;
 wire [3:0] key_in;
-wire [3:0] col_reg;
+wire [3:0] col_reg, key;
 wire scan, delay, decoder;
 wire esperar, decodificar;
 
 //logica negada
-wire nrest, npush_button;
-wire [3:0] nrow, ncol, nkey_out;
+wire nreset, npush_button;
+wire [3:0] nrow, ncol, nkey_out, key_c;
 
 assign nreset=~reset;
-assign push_button=delay;
 
 
 clock clk_div (
@@ -64,12 +65,11 @@ debounce db (
     .clk(clk1),
     .reset(nreset),
     .key_in(key_in),
+    .scan(scan),
     .esperar(esperar),
     .delay(delay),
-    .key_out(nkey_out)
+    .key_out(key_c)
 );
-
-assign key_out=~nkey_out;
 
 FSM_teclado fsm (
     .clk(clk1),
@@ -84,4 +84,20 @@ FSM_teclado fsm (
     .esperar(esperar)
 );
 
+Special_keys sk(
+	.key_in(key_c), 
+    .push_button(delay),
+   .accept_key(nAceptar),
+   .delete_key(nBorrar),
+   .exit_key(nSalir),
+    .key_out(nkey_out),
+   .key_enable(npush_button)
+);
+
+assign key_out= nkey_out;//nkey_out;
+assign push_button = npush_button;
+assign Aceptar = nAceptar;
+assign Borrar = nBorrar;
+assign Salir = nSalir;
+ 
 endmodule

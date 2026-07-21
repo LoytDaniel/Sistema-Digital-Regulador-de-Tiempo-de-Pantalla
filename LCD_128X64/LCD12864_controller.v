@@ -31,7 +31,7 @@ module LCD12864_controller #(
     input [7:0] inicio_hr, inicio_min,
     input [7:0] final_hr, final_min,
     input [1:0] posicion_fila, // 0: fila 1 (tiempo) 1: fila 2 (inicio) 2: fila 3 (final) 
-    input [1:0] posicion_columna, // 0: columna 1 (decena hora) 1: columna 2 (unidades hora) 2: columna 3 (decena minuto) 3: columna 4 (unidades minuto)
+    input [1:0] posicion_columna // 0: columna 1 (decena hora) 1: columna 2 (unidades hora) 2: columna 3 (decena minuto) 3: columna 4 (unidades minuto)
 );
 
 //memorias para cada pantalla
@@ -122,11 +122,11 @@ initial begin
     clk_10 <= 1'b0;
     clk_counter <= 'b0;
     // Cargar memorias gráficas desde archivos de texto
-    $readmemh("KIDS_MODE.txt",kids_mem);
-    $readmemh("ADULT_MODE.txt",adult_mem);
-    $readmemh("MAIN_MENU.txt",menu_mem);
-    $readmemh("PASSWORD.txt",password_mem);
-    $readmemh("SETTINGS.txt",setting_mem);
+    $readmemh("../LCD_128X64/Screens/KIDS_MODE.txt",kids_mem);
+    $readmemh("../LCD_128X64/Screens/ADULT_MODE.txt",adult_mem);
+    $readmemh("../LCD_128X64/Screens/MAIN_MENU.txt",menu_mem);
+    $readmemh("../LCD_128X64/Screens/PASSWORD.txt",password_mem);
+    $readmemh("../LCD_128X64/Screens/SETTINGS.txt",setting_mem);
     pixel_asterisco[0] = 8'h00;
     pixel_asterisco[1] = 8'h14;
     pixel_asterisco[2] = 8'h08;
@@ -303,8 +303,8 @@ always @(*) begin
                     else if(posicion_columna == 2'b11) graphic_mem[583+j]=pixel_guion[6-j];
                 end
             end
-        end
-    end
+        end 
+    end 
 end
 
 // Registro de estado (síncrono con clk_10)

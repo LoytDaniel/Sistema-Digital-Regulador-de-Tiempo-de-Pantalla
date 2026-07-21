@@ -1,6 +1,0 @@
-
-State Machine - |top|FSM_teclado:fsm|state
-Name state.IDLE state.DEBOUNCE state.SCAN 
-state.IDLE 0 0 0 
-state.SCAN 1 0 1 
-state.DEBOUNCE 1 1 0 

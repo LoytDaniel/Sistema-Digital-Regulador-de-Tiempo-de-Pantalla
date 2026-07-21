@@ -1,0 +1,42 @@
+module franja_horaria (
+    input reset,
+    input kids,
+    input [7:0] inicio_hr, inicio_min,
+    input [7:0] final_hr, final_min,
+    input [7:0] current_time_H, current_time_M,
+    output reg temp_enable
+);
+
+wire [15:0] inicio_time, final_time, current_time;
+wire franja_noc;
+
+assign current_time = {current_time_H, current_time_M};
+assign inicio_time = {inicio_hr, inicio_min};
+assign final_time = {final_hr, final_min};
+
+assign franja_noc = (inicio_time > final_time):
+
+wire cumple_inicio = (current_time >= inicio_time );
+wire cumple_final = (current_time <= final_time);
+//Detecta franjas nocturnas 
+wire cumple_franja = franja_noc ? (cumple_inicio | cumple final) : (cumple_inicio & cumple_final);
+
+always @(*) begin
+    if(reset) begin
+        temp_enable = 0;
+    end
+    else if (kids & cumple_franja) begin
+        temp_enable = 1;
+    end
+    else begin
+        temp_enable = 0;
+    end
+end
+
+endmodule
+
+
+
+
+
+    

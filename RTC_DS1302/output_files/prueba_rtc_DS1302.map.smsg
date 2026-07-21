@@ -1,2 +1,0 @@
-Info (10281): Verilog HDL Declaration information at DS1302_controller.v(16): object "IO" differs only in case from object "io" in the same scope File: C:/Users/Usuario/Documents/GitHub/Sistema-Digital-Regulador-de-Tiempo-de-Pantalla/RTC_DS1302/DS1302_controller.v Line: 16
-Warning (10268): Verilog HDL information at Display_7_seg.v(142): always construct contains both blocking and non-blocking assignments File: C:/Users/Usuario/Documents/GitHub/Sistema-Digital-Regulador-de-Tiempo-de-Pantalla/RTC_DS1302/Display_7_seg.v Line: 142

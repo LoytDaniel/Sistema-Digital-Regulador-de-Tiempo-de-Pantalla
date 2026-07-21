@@ -12,7 +12,7 @@ always @(posedge clk) begin
         count <= 0;
     end
     else begin
-        if (cuenta == 25000) begin //vamos a dejarlo de 1 ms
+        if (cuenta == 250000) begin //vamos a dejarlo de 1 ms
             count <= ~count; // Cambia el estado del contador
             cuenta <= 0; // Reinicia la cuenta
         end
