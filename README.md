@@ -34,7 +34,7 @@ Sistema digital basado en FPGA para el **control del tiempo de uso de un televis
 
 El sistema controla el tiempo de uso diario de un televisor mediante una FPGA que integra sensores de entrada (teclado matricial, módulo RTC, pulsadores) y actuadores de salida (relé, pantalla LCD gráfica). El cuidador configura un tiempo máximo de uso y una franja horaria permitida; al agotarse el tiempo o salir del horario configurado, el sistema corta la alimentación del televisor automáticamente.
 
-<div align="center">
+
 | Característica | Detalle |
 |---|---|
 | Plataforma | FPGA Cyclone IV |
@@ -42,7 +42,7 @@ El sistema controla el tiempo de uso diario de un televisor mediante una FPGA qu
 | Entradas | Teclado matricial 4×4, módulo RTC DS1302, pulsadores PLAY/PAUSE |
 | Salidas | Relé (corte de alimentación), pantalla LCD gráfica 128×64 |
 | Pantallas del sistema | Kids Mode, Password, Main Menu, Adult Mode, Settings |
-</div>
+
 
 ---
 
@@ -50,9 +50,9 @@ El sistema controla el tiempo de uso diario de un televisor mediante una FPGA qu
 
 El diagrama de bloques resume la interacción entre sensores, la unidad de control (FPGA) y los actuadores del sistema.
 
-<div align="center">
+<p align="center">
   <img src="Imagenes/diagrama_bloques.png" alt="Diagrama de bloques del sistema" width="600">
-</div>
+</p>
 
 ---
 
@@ -60,24 +60,25 @@ El diagrama de bloques resume la interacción entre sensores, la unidad de contr
 
 La navegación se realiza mediante el teclado matricial entre cinco pantallas: **Kids Mode** (pantalla predeterminada, muestra el tiempo restante), **Password** (acceso protegido), **Main Menu**, **Adult Mode** (hora real sin restricciones) y **Settings** (configuración de tiempo máximo y franja horaria en formato HH:MM).
 
-<div align="center">
+<p align="center">
   <img src="Imagenes/interfaz_navegacion.png" alt="Diagrama de navegación entre pantallas" width="650">
-</div>
+</p>
 
-<div align="center">
+
 | Pantalla | Función |
 |---|---|
 | Kids Mode | Tiempo restante + control PLAY/PAUSE | 
 | Password | Ingreso de clave (Accept / Delete / Exit) |
 | Adult Mode | Hora real, restricciones deshabilitadas |
 | Settings | Configuración de tiempo e inicio/fin |
-</div>
+
 
 ---
 
 ## Módulos implementados
 
-<div align="center">
+
+
 | Módulo | Descripción |
 |---|---|
 | **RTC (DS1302)** | Interfaz serie síncrona de 3 hilos (CE, SCLK, IO) para lectura/escritura del reloj en tiempo real. Actualización automática cada segundo. |
@@ -88,7 +89,8 @@ La navegación se realiza mediante el teclado matricial entre cinco pantallas: *
 | **Kids Mode (Timer + Franja Horaria)** | Cuenta regresiva del tiempo disponible, soporte de franjas nocturnas (cruce de medianoche), reinicio diario automático a las 00:00. |
 | **Relé** | Módulo combinacional: corta la alimentación si `time_finish` en Kids Mode, o durante la pantalla Password. |
 | **Settings** | FSM de 2 estados (selección / edición) para configurar Tiempo, Inicio y Final en formato HH:MM, con saturación de valores a rango 24h válido. |
-</div>
+
+
 
 ---
 
@@ -96,7 +98,7 @@ La navegación se realiza mediante el teclado matricial entre cinco pantallas: *
  
 Referencia rápida de qué módulo hace qué y en qué carpeta del repositorio se encuentra su descripción en Verilog.
  
-<div align="center">
+
 | Módulo | Función | Ubicación en el repo |
 |---|---|---|
 | **RTC (DS1302)** | Interfaz serie con el reloj en tiempo real; lectura/escritura de hora y fecha | [`RTC_DS1302/`](RTC_DS1302) |
@@ -109,7 +111,7 @@ Referencia rápida de qué módulo hace qué y en qué carpeta del repositorio s
 | **Relé** | Control combinacional de la señal de corte de alimentación | [`relee_controller.v`](/relee_controller.v) |
 | **Fuente de caracteres (bitmap font)** | Mapa de bits usado por el LCD para renderizar texto | [`LCD12864_BitmapFont.xlsx`](/LCD12864_BitmapFont.xlsx) |
 | **Integración final** | Top-level que conecta todos los módulos del sistema | [`FINAL/`](/FINAL/) |
-</div>
+
  
 ---
 
@@ -117,45 +119,45 @@ Referencia rápida de qué módulo hace qué y en qué carpeta del repositorio s
 
 <details>
 <summary><b>Controlador RTC y configuración de hora</summary>
-<div align="center">
+<p align="center">
   <img src="Imagenes/fsm_rtc_control.jpg" alt="FSM del RTC" width="600">
   <img src="Imagenes/fsm_rtc_settime.jpg" alt="FSM del RTC" width="600">
-</div>
+</p>
 </details>
 
 <details>
 <summary><b>Controlador LCD 128×64</b></summary>
-<div align="center">
+<p align="center">
   <img src="Imagenes/fsm_lcd.jpg" alt="FSM del LCD" width="600">
-</div>
+</p>
 </details>
 
 <details>
 <summary><b>Teclado matricial</b></summary>
-<div align="center">
+<p align="center">
   <img src="Imagenes/fsm_teclado.jpg" alt="FSM del teclado" width="500">
-</div>
+</p>
 </details>
 
 <details>
 <summary><b>Cambio de pantallas / menú principal</b></summary>
-<div align="center">
+<p align="center">
   <img src="Imagenes/fsm_menu.jpg" alt="FSM de cambio de pantallas" width="600">
-</div>
+</p>
 </details>
 
 <details>
 <summary><b>Botones PLAY/PAUSE</b></summary>
-<div align="center">
+<p align="center">
   <img src="Imagenes/fsm_botones.jpg" alt="FSM de botones" width="500">
-</div>
+</p>
 </details>
 
 <details>
 <summary><b>Configuración (Settings)</b></summary>
-<div align="center">
+<p align="center">
   <img src="Imagenes/fsm_settings.jpg" alt="FSM de configuración" width="500">
-</div>
+</p>
 </details>
 
 ---
@@ -169,10 +171,10 @@ El sistema utiliza una FPGA Cyclone IV como unidad de control central, conectada
 - **Módulo de relé (optoacoplado)** — corta la alimentación del televisor (cargas de mayor voltaje)
 - **Pantalla LCD gráfica 128×64** — interfaz visual
 
-<div align="center">
+<p align="center">
   <img src="Imagenes/circuito_electrico.jpg" alt="Circuito eléctrico del dispositivo" width="650">
   <img src="Imagenes/pcb.jpg" alt="PCB diseñada del dispositivo" width="650">
-</div>
+</p>
 
 ---
 
@@ -180,14 +182,14 @@ El sistema utiliza una FPGA Cyclone IV como unidad de control central, conectada
 
 Carcasa diseñada para alojar la FPGA, el módulo de relé, el RTC, el teclado matricial y la pantalla LCD de forma compacta.
 
-<div align="center">
+<p align="center">
   <img src="Imagenes/modelado_3d_1.png" alt="Render del modelado 3D - vista 1" width="45%">
   <img src="Imagenes/modelado_3d_2.png" alt="Render del modelado 3D - vista 2" width="45%">
-</div>
+</p>
 
-<div align="center">
+<p align="center">
   <img src="Imagenes/carcasa_fisica.jpg" alt="Carcasa física impresa" width="500">
-</div>
+</p>
 
 ---
 
@@ -208,10 +210,10 @@ El desarrollo se realizó de forma **incremental**: cada módulo se validó de m
  
 Video corto que muestran el sistema en operación real sobre protoboard/PCB.
  
-<div align="center">
+<p align="center">
       <b>Ingreso de contraseña</b><br><br>
       <video src="Imagenes/prueba.mp4" controls></video>
-</div>
+</p>
 
 ## Resultados
 
