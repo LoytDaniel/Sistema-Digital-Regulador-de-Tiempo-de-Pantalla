@@ -20,6 +20,7 @@ Sistema digital basado en FPGA para el **control del tiempo de uso de un televis
 - [Arquitectura del sistema](#arquitectura-del-sistema)
 - [Interfaz de usuario](#interfaz-de-usuario)
 - [Módulos implementados](#módulos-implementados)
+- [Ubicación de los módulos en el repositorio](#Ubicación-de-los-módulos-en-el-repositorio)
 - [Máquinas de estado](#máquinas-de-estado)
 - [Hardware y circuito](#hardware-y-circuito)
 - [Modelado 3D / Carcasa](#modelado-3d--carcasa)
@@ -206,14 +207,11 @@ El desarrollo se realizó de forma **incremental**: cada módulo se validó de m
 
 ---
 
-## Videos de funcionamiento
-
-Video corto que muestran el sistema en operación real sobre protoboard/PCB del proyecto [AQUI](/Imagenes/prueba.mp4).
- 
-
 ## Resultados
 
 El sistema cumple satisfactoriamente los objetivos planteados, logrando un dispositivo **funcional, modular y de fácil mantenimiento**, gracias al uso de máquinas de estados finitos independientes por módulo y su integración bajo una FSM principal de navegación.
+
+Video corto que muestran el sistema en operación real sobre protoboard/PCB del proyecto [AQUI](/Imagenes/prueba.mp4).
 
 ---
 
