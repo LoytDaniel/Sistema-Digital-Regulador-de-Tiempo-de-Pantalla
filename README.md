@@ -23,7 +23,6 @@ Sistema digital basado en FPGA para el **control del tiempo de uso de un televis
 - [Máquinas de estado](#máquinas-de-estado)
 - [Hardware y circuito](#hardware-y-circuito)
 - [Modelado 3D / Carcasa](#modelado-3d--carcasa)
-- [Estructura del repositorio](#estructura-del-repositorio)
 - [Pruebas y validación](#pruebas-y-validación)
 - [Resultados](#resultados)
 - [Uso de IA](#uso-de-ia)
@@ -162,24 +161,6 @@ Carcasa diseñada para alojar la FPGA, el módulo de relé, el RTC, el teclado m
 </p>
 
 ---
-
-## Estructura del repositorio
-
-```
-Sistema-Digital-Regulador-de-Tiempo-de-Pantalla/
-├── FINAL/                    # Integración final del sistema
-├── Keyboard_fsm/              # Módulo de teclado matricial 4x4
-├── Kids_screen/                # Timer + franja horaria + Kids Mode
-├── LCD_128X64/                 # Controlador de pantalla gráfica
-├── Menu_screen/                 # Navegación entre pantallas (FSM principal)
-├── Password_screen/             # Módulo de validación de contraseña
-├── RTC_DS1302/                   # Interfaz con el reloj en tiempo real
-├── Screens_Change/                # Lógica de cambio de ventanas
-├── Settings_screen/                # Configuración de tiempo y franja horaria
-├── relee_controller.v                # Módulo combinacional del relé
-├── LCD12864_BitmapFont.xlsx           # Fuente de caracteres bitmap para el LCD
-└── README.md
-```
 
 ## Pruebas y validación
 
