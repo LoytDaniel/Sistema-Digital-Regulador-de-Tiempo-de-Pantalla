@@ -1,8 +1,8 @@
 # Sistema Digital Regulador de Tiempo en Pantalla
 
 ![Verilog](https://img.shields.io/badge/HDL-Verilog-blue?logo=v&logoColor=white)
-![FPGA](https://img.shields.io/badge/Platform-Cyclone%20IV-orange)
-![Quartus](https://img.shields.io/badge/Toolchain-Quartus-purple)
+![FPGA](https://img.shields.io/badge/FPGA-Cyclone%20IV-orange)
+![Quartus](https://img.shields.io/badge/Software-Quartus-purple)
 ![Status](https://img.shields.io/badge/Status-Completado-brightgreen)
 ![License](https://img.shields.io/badge/License-Academic%20Project-lightgrey)
 
