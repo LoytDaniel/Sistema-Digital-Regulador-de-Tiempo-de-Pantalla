@@ -207,13 +207,9 @@ El desarrollo se realizó de forma **incremental**: cada módulo se validó de m
 ---
 
 ## Videos de funcionamiento
+
+Video corto que muestran el sistema en operación real sobre protoboard/PCB del proyecto [AQUI](/Imagenes/prueba.mp4).
  
-Video corto que muestran el sistema en operación real sobre protoboard/PCB.
- 
-<p align="center">
-      <b>Ingreso de contraseña</b><br><br>
-      <video src="Imagenes/prueba.mp4" controls></video>
-</p>
 
 ## Resultados
 
